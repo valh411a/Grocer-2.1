@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.grocer21.Database.Allergy;
+import com.example.grocer21.Database.Diet;
 
 /**
  * A fragment representing a list of Items.
@@ -19,26 +19,26 @@ import com.example.grocer21.Database.Allergy;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class AllergyFragment extends Fragment {
+public class DietFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private AllergyFragment.OnListFragmentInteractionListener mListener;
+    private DietFragment.OnListFragmentInteractionListener mListener;
     DatabaseViewModel databaseViewModel;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public AllergyFragment() {
+    public DietFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static AllergyFragment newInstance(int columnCount) {
-        AllergyFragment fragment = new AllergyFragment();
+    public static DietFragment newInstance(int columnCount) {
+        DietFragment fragment = new DietFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -58,9 +58,9 @@ public class AllergyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_allergy_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_diet_list, container, false);
 
-        getActivity().setTitle("Allergies");
+        getActivity().setTitle("Diets");
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -71,7 +71,7 @@ public class AllergyFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyAllergyRecyclerViewAdapter(databaseViewModel.getAllAllergies(), mListener));
+            recyclerView.setAdapter(new MyDietRecyclerViewAdapter(databaseViewModel.getAllDiets(), mListener));
         }
         return view;
     }
@@ -106,6 +106,6 @@ public class AllergyFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(Allergy item);
+        void onListFragmentInteraction(Diet item);
     }
 }

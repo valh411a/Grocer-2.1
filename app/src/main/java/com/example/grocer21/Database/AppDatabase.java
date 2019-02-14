@@ -8,11 +8,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {Food.class, Allergy.class}, version = 1)
+@Database(entities = {Food.class, Allergy.class, Diet.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract FoodDao foodDao();
     public abstract AllergyDao allergyDao();
+    public abstract DietDao dietDao();
 
     private static volatile AppDatabase INSTANCE;
 
@@ -42,10 +43,12 @@ public abstract class AppDatabase extends RoomDatabase {
 
         private final FoodDao fDao;
         private final AllergyDao aDao;
+        private final DietDao dDao;
 
         PopulateDbAsync(AppDatabase db) {
             fDao = db.foodDao();
             aDao = db.allergyDao();
+            dDao = db.dietDao();
         }
 
         @Override
@@ -61,6 +64,15 @@ public abstract class AppDatabase extends RoomDatabase {
             aDao.insert(allergy);
             allergy = new Allergy("Shellfish");
             aDao.insert(allergy);
+
+            dDao.deleteAll();
+            Diet diet = new Diet("Keto");
+            dDao.insert(diet);
+            diet = new Diet("Paleo");
+            dDao.insert(diet);
+            diet = new Diet("Vegetarian");
+            dDao.insert(diet);
+
             return null;
         }
     }

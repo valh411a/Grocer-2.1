@@ -19,11 +19,17 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.grocer21.Database.Allergy;
+import com.example.grocer21.Database.Diet;
 import com.example.grocer21.Database.Food;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements FoodFragment.OnListFragmentInteractionListener, HomeScreenFragment.OnFragmentInteractionListener, AllergyFragment.OnListFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity
+        implements
+        FoodFragment.OnListFragmentInteractionListener,
+        HomeScreenFragment.OnFragmentInteractionListener,
+        AllergyFragment.OnListFragmentInteractionListener,
+        DietFragment.OnListFragmentInteractionListener {
 
     DrawerLayout mDrawerLayout;
     Fragment fragment = null;
@@ -44,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements FoodFragment.OnLi
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
         final DatabaseViewModel databaseViewModel = ViewModelProviders.of(this).get(DatabaseViewModel.class);
+
         databaseViewModel.allFoods.observe(this, new Observer<List<Food>>() {
             @Override
             public void onChanged(@Nullable List<Food> foods) {
@@ -53,6 +60,12 @@ public class MainActivity extends AppCompatActivity implements FoodFragment.OnLi
         databaseViewModel.allAllergies.observe(this, new Observer<List<Allergy>>() {
             @Override
             public void onChanged(@Nullable List<Allergy> allergies) {
+
+            }
+        });
+        databaseViewModel.allDiets.observe(this, new Observer<List<Diet>>() {
+            @Override
+            public void onChanged(@Nullable List<Diet> diets) {
 
             }
         });
@@ -71,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements FoodFragment.OnLi
                             fragment = new AllergyFragment();
 
                         } else if (id == R.id.nav_diet_list) {
+                            fragment = new DietFragment();
 
                         }
 
@@ -139,6 +153,11 @@ public class MainActivity extends AppCompatActivity implements FoodFragment.OnLi
 
     @Override
     public void onListFragmentInteraction(Allergy item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Diet item) {
 
     }
 }
