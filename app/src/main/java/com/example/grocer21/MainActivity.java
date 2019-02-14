@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     Fragment fragment = null;
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction fragmentTransaction;
+    boolean onTopLevelNav = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,27 +80,30 @@ public class MainActivity extends AppCompatActivity
 
                         if (id == R.id.nav_food_list) {
                             fragment = new FoodFragment();
-
                         } else if (id == R.id.nav_allergy_list) {
                             fragment = new AllergyFragment();
-
                         } else if (id == R.id.nav_diet_list) {
                             fragment = new DietFragment();
-
                         }
 
-                        menuItem.setChecked(true);
                         setTitle(menuItem.getTitle());
                         mDrawerLayout.closeDrawers();
-                        if (fragment != null) {
+                        if (onTopLevelNav) {
+                            if (fragment != null) {
+                                fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+                                onTopLevelNav = false;
+                            }
+                        } else {
                             fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+                            fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
                         }
-
 
                         return true;
                     }
                 });
+
+
 
         mDrawerLayout.addDrawerListener(
                 new DrawerLayout.DrawerListener() {
@@ -159,5 +163,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(Diet item) {
 
+    }
+
+    public void onBackPressed() { //or use on menu item clicked
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            fragment = new HomeScreenFragment();
+            fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+            onTopLevelNav = true;
+        }else {
+            super.onBackPressed();
+        }
     }
 }

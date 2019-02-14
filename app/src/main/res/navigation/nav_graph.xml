@@ -44,4 +44,28 @@
             app:destination="@id/homeScreenFragment"
             app:popUpTo="@+id/homeScreenFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/allergyFragment"
+        android:name="com.example.grocer21.AllergyFragment"
+        android:label="fragment_allergy_list"
+        tools:layout="@layout/fragment_allergy_list" >
+        <action
+            android:id="@+id/action_allergyFragment_to_navigationDrawer"
+            app:destination="@id/navigationDrawer" />
+        <action
+            android:id="@+id/action_allergyFragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dietFragment"
+        android:name="com.example.grocer21.DietFragment"
+        android:label="fragment_diet_list"
+        tools:layout="@layout/fragment_diet_list" >
+        <action
+            android:id="@+id/action_dietFragment_to_navigationDrawer"
+            app:destination="@id/navigationDrawer" />
+        <action
+            android:id="@+id/action_dietFragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
+    </fragment>
 </navigation>
