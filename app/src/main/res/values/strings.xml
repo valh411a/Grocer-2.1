@@ -15,4 +15,7 @@
     <string name="HomeScreenWelcome">Welcome to Grocer!</string>
     <string name="HomeScreenInfoButton">What do?</string>
     <string name="HomeScreenScanBarcodeButton">Scan Barcode</string>
+    <string name="foodfragmenttitle">Food</string>
+    <string name="allergyfragmenttitle">Allergies</string>
+    <string name="homescreenfragmenttitle">Home</string>
 </resources>

@@ -8,10 +8,11 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {Food.class}, version = 1)
+@Database(entities = {Food.class, Allergy.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract FoodDao foodDao();
+    public abstract AllergyDao allergyDao();
 
     private static volatile AppDatabase INSTANCE;
 
@@ -20,7 +21,7 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "word_database").addCallback(appDatabaseCallback)
+                            AppDatabase.class, "app_database").addCallback(appDatabaseCallback)
                             .build();
                 }
             }
@@ -40,9 +41,11 @@ public abstract class AppDatabase extends RoomDatabase {
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final FoodDao fDao;
+        private final AllergyDao aDao;
 
         PopulateDbAsync(AppDatabase db) {
             fDao = db.foodDao();
+            aDao = db.allergyDao();
         }
 
         @Override
@@ -52,6 +55,12 @@ public abstract class AppDatabase extends RoomDatabase {
             fDao.insert(food);
             food = new Food("Pork", 1111111112);
             fDao.insert(food);
+
+            aDao.deleteAll();
+            Allergy allergy = new Allergy("Gluten");
+            aDao.insert(allergy);
+            allergy = new Allergy("Shellfish");
+            aDao.insert(allergy);
             return null;
         }
     }

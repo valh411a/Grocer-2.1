@@ -18,11 +18,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.grocer21.Database.Allergy;
 import com.example.grocer21.Database.Food;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements FoodFragment.OnListFragmentInteractionListener, HomeScreenFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements FoodFragment.OnListFragmentInteractionListener, HomeScreenFragment.OnFragmentInteractionListener, AllergyFragment.OnListFragmentInteractionListener {
 
     DrawerLayout mDrawerLayout;
     Fragment fragment = null;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements FoodFragment.OnLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
@@ -49,6 +50,12 @@ public class MainActivity extends AppCompatActivity implements FoodFragment.OnLi
 
             }
         });
+        databaseViewModel.allAllergies.observe(this, new Observer<List<Allergy>>() {
+            @Override
+            public void onChanged(@Nullable List<Allergy> allergies) {
+
+            }
+        });
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
@@ -61,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements FoodFragment.OnLi
                             fragment = new FoodFragment();
 
                         } else if (id == R.id.nav_allergy_list) {
+                            fragment = new AllergyFragment();
 
                         } else if (id == R.id.nav_diet_list) {
 
@@ -127,5 +135,10 @@ public class MainActivity extends AppCompatActivity implements FoodFragment.OnLi
     public void displayHelp(View view) {
         DialogFragment newHelpFragment = new HelpDialogFragment();
         newHelpFragment.show(getSupportFragmentManager(), "HelpDialog");
+    }
+
+    @Override
+    public void onListFragmentInteraction(Allergy item) {
+
     }
 }
