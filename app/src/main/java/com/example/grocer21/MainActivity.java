@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity
         FoodFragment.OnListFragmentInteractionListener,
         HomeScreenFragment.OnFragmentInteractionListener,
         AllergyFragment.OnListFragmentInteractionListener,
-        DietFragment.OnListFragmentInteractionListener {
+        DietFragment.OnListFragmentInteractionListener,
+        FoodItemFragment.OnFragmentInteractionListener {
 
     DrawerLayout mDrawerLayout;
     Fragment fragment = null;
@@ -143,6 +144,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(Food item) {
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        String name = item.getName();
+        Bundle bundle = new Bundle();
+        bundle.putString("name", name);
+        FoodItemFragment foodItemFragment = new FoodItemFragment();
+        foodItemFragment.setArguments(bundle);
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, foodItemFragment).addToBackStack(null).commit();
+        onTopLevelNav = false;
+
     }
 
     @Override
@@ -165,9 +175,9 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void onBackPressed() { //or use on menu item clicked
+    public void onBackPressed() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        if (fragmentManager.getBackStackEntryCount() > 0) {
+        if (fragmentManager.getBackStackEntryCount() >= 0) {
             fragment = new HomeScreenFragment();
             fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
             onTopLevelNav = true;
