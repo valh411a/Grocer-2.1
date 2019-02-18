@@ -56,9 +56,22 @@ public class FoodItemFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_food_item, container, false);
 
-        getActivity().setTitle(foodName);
         TextView viewPiece = view.findViewById(R.id.food_name);
         viewPiece.setText(foodName);
+        getActivity().setTitle(foodName);
+
+        if(savedInstanceState == null) {
+            DietFragment foodItemDietList = new DietFragment();
+            AllergyFragment foodItemAllergyList = new AllergyFragment();
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.list_a_container, foodItemDietList)
+                    .commit();
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.list_b_container, foodItemAllergyList)
+                    .commit();
+        }
 
     return view;
     }
@@ -72,6 +85,7 @@ public class FoodItemFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
     }
 
     @Override

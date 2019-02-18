@@ -19,4 +19,6 @@
     <string name="allergyfragmenttitle">Allergies</string>
     <string name="homescreenfragmenttitle">Home</string>
     <string name="food_item_diet_subtitle">This food is included when regarded for the following diets:</string>
+    <string name="food_item_diets_title">Diets</string>
+    <string name="food_item_allergies_subtitle">This food can be dangerous for the following allergies:</string>
 </resources>
