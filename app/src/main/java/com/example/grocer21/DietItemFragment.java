@@ -25,16 +25,15 @@ public class DietItemFragment extends Fragment {
     DatabaseViewModel databaseViewModel;
     String dietName;
 
-    public DietItemFragment() {
-        // Required empty public constructor
-    }
-
-    public static DietItemFragment newinstance(int columnCount, String name) {
-        DietItemFragment fragment = new DietItemFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override
@@ -69,20 +68,21 @@ public class DietItemFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public DietItemFragment() {
+        // Required empty public constructor
+    }
+
+    public static DietItemFragment newinstance(int columnCount, String name) {
+        DietItemFragment fragment = new DietItemFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     /**

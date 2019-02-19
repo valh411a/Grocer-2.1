@@ -25,16 +25,15 @@ public class AllergyItemFragment extends Fragment {
     DatabaseViewModel databaseViewModel;
     String allergyName;
 
-    public AllergyItemFragment() {
-        // Required empty public constructor
-    }
-
-    public static AllergyItemFragment newInstance(int columnCount, String name) {
-        AllergyItemFragment fragment = new AllergyItemFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override
@@ -67,20 +66,21 @@ public class AllergyItemFragment extends Fragment {
         return view;    }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public AllergyItemFragment() {
+        // Required empty public constructor
+    }
+
+    public static AllergyItemFragment newInstance(int columnCount, String name) {
+        AllergyItemFragment fragment = new AllergyItemFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     /**

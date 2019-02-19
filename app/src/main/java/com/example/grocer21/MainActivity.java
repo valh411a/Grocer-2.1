@@ -41,11 +41,6 @@ public class MainActivity extends AppCompatActivity
     boolean onTopLevelNav = true;
     Toolbar toolbar;
 
-    public MainActivity() {
-        toolbar = null;
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +139,11 @@ public class MainActivity extends AppCompatActivity
         );
     }
 
+    public MainActivity() {
+        toolbar = null;
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -231,4 +231,5 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
 }

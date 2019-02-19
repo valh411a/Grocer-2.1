@@ -26,26 +26,20 @@ public class AllergyFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    DatabaseViewModel databaseViewModel;
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private AllergyFragment.OnListFragmentInteractionListener mListener;
-    DatabaseViewModel databaseViewModel;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public AllergyFragment() {
-    }
-
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static AllergyFragment newInstance(int columnCount) {
-        AllergyFragment fragment = new AllergyFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnListFragmentInteractionListener) {
+            mListener = (OnListFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
+        }
     }
 
     @Override
@@ -82,23 +76,29 @@ public class AllergyFragment extends Fragment {
         return view;
     }
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
-    }
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
+
+    /**
+     * Mandatory empty constructor for the fragment manager to instantiate the
+     * fragment (e.g. upon screen orientation changes).
+     */
+    public AllergyFragment() {
+    }
+
+    // TODO: Customize parameter initialization
+    @SuppressWarnings("unused")
+    public static AllergyFragment newInstance(int columnCount) {
+        AllergyFragment fragment = new AllergyFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this

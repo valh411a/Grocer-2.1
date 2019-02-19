@@ -31,21 +31,15 @@ public class DietFragment extends Fragment {
     private DietFragment.OnListFragmentInteractionListener mListener;
     DatabaseViewModel databaseViewModel;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public DietFragment() {
-    }
-
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static DietFragment newInstance(int columnCount) {
-        DietFragment fragment = new DietFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnListFragmentInteractionListener) {
+            mListener = (OnListFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
+        }
     }
 
     @Override
@@ -78,23 +72,29 @@ public class DietFragment extends Fragment {
         return view;
     }
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
-    }
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
+
+    /**
+     * Mandatory empty constructor for the fragment manager to instantiate the
+     * fragment (e.g. upon screen orientation changes).
+     */
+    public DietFragment() {
+    }
+
+    // TODO: Customize parameter initialization
+    @SuppressWarnings("unused")
+    public static DietFragment newInstance(int columnCount) {
+        DietFragment fragment = new DietFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
