@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity
         HomeScreenFragment.OnFragmentInteractionListener,
         AllergyFragment.OnListFragmentInteractionListener,
         DietFragment.OnListFragmentInteractionListener,
-        FoodItemFragment.OnFragmentInteractionListener {
+        FoodItemFragment.OnFragmentInteractionListener,
+        DietItemFragment.OnFragmentInteractionListener {
 
     DrawerLayout mDrawerLayout;
     Fragment fragment = null;
@@ -184,6 +185,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(Diet item) {
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        String name = item.getName();
+        toolbar.setTitle(name);
+        Bundle bundle = new Bundle();
+        bundle.putString("name", name);
+        DietItemFragment dietItemFragment = new DietItemFragment();
+        dietItemFragment.setArguments(bundle);
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, dietItemFragment).addToBackStack(null).commit();
+        onTopLevelNav = false;
 
     }
 

@@ -21,4 +21,8 @@
     <string name="food_item_diet_subtitle">This food is included when regarded for the following diets:</string>
     <string name="food_item_diets_title">Diets</string>
     <string name="food_item_allergies_subtitle">This food can be dangerous for the following allergies:</string>
+    <string name="example_diet_description">A description of the diet goes here that outlines the basic principles that the diet provides</string>
+    <string name="diet_item_food_title">Foods</string>
+    <string name="diet_list_subtitle">The following foods are a good fit for this diet:</string>
+    <string name="food_item_description">A brief description of the food item goes here that informs the user in the slight case they aren\'t sure what they clicked.</string>
 </resources>
