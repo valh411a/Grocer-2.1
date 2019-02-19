@@ -21,23 +21,18 @@
     <fragment
         android:id="@+id/helpDialogFragment"
         android:name="com.example.grocer21.HelpDialogFragment"
-        android:label="HelpDialogFragment" >
+        android:label="HelpDialogFragment">
         <action
             android:id="@+id/action_helpDialogFragment_to_homeScreenFragment"
             app:destination="@id/homeScreenFragment" />
     </fragment>
-    <activity
-        android:id="@+id/navigationDrawer"
-        android:name="com.example.grocer21.NavigationDrawer"
-        android:label="activity_navigation_drawer"
-        tools:layout="@layout/activity_navigation_drawer" />
     <fragment
         android:id="@+id/foodFragment"
         android:name="com.example.grocer21.FoodFragment"
         android:label="fragment_database_list"
         tools:layout="@layout/fragment_database_list" >
         <action
-            android:id="@+id/action_foodFragment_to_navigationDrawer"
+            android:id="@+id/action_foodFragment_to_placeholder"
             app:destination="@id/navigationDrawer" />
     </fragment>
     <fragment
@@ -46,7 +41,7 @@
         android:label="fragment_allergy_list"
         tools:layout="@layout/fragment_allergy_list" >
         <action
-            android:id="@+id/action_allergyFragment_to_navigationDrawer"
+            android:id="@+id/action_allergyFragment_to_placeholder"
             app:destination="@id/navigationDrawer" />
     </fragment>
     <fragment
@@ -55,7 +50,7 @@
         android:label="fragment_diet_list"
         tools:layout="@layout/fragment_diet_list" >
         <action
-            android:id="@+id/action_dietFragment_to_navigationDrawer"
+            android:id="@+id/action_dietFragment_to_placeholder"
             app:destination="@id/navigationDrawer" />
     </fragment>
     <fragment
@@ -79,7 +74,31 @@
             android:id="@+id/action_foodItemFragment_to_foodFragment"
             app:destination="@id/foodFragment" />
         <action
-            android:id="@+id/action_foodItemFragment_to_dietItemFragment"
+            android:id="@+id/action_foodItemFragment_to_allergyItemFragment2"
+            app:destination="@id/allergyItemFragment" />
+        <action
+            android:id="@+id/action_foodItemFragment_to_dietItemFragment2"
             app:destination="@id/dietItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allergyItemFragment"
+        android:name="com.example.grocer21.AllergyItemFragment"
+        android:label="fragment_allergy_item"
+        tools:layout="@layout/fragment_allergy_item" >
+        <action
+            android:id="@+id/action_allergyItemFragment_to_allergyFragment"
+            app:destination="@id/allergyFragment" />
+        <action
+            android:id="@+id/action_allergyItemFragment_to_foodItemFragment2"
+            app:destination="@id/foodItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigationDrawer"
+        android:name="com.example.grocer21.NavigationDrawer"
+        android:label="activity_navigation_drawer"
+        tools:layout="@layout/app_bar_navigation_drawer">
+        <action
+            android:id="@+id/action_placeholder_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
 </navigation>
