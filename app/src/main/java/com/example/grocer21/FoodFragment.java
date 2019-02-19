@@ -64,8 +64,6 @@ public class FoodFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_food_list, container, false);
 
-        getActivity().setTitle("Foods");
-
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();

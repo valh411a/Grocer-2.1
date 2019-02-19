@@ -56,6 +56,8 @@ public class AllergyFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+
     }
 
     @Override
@@ -63,7 +65,7 @@ public class AllergyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_allergy_list, container, false);
 
-        getActivity().setTitle("Allergies");
+
 
         // Set the adapter
         if (view instanceof RecyclerView) {

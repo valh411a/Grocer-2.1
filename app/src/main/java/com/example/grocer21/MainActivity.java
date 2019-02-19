@@ -37,22 +37,32 @@ public class MainActivity extends AppCompatActivity
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction fragmentTransaction;
     boolean onTopLevelNav = true;
+    Toolbar toolbar;
+
+    public MainActivity() {
+        toolbar = null;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Toolbar toolbar = findViewById(R.id.toolbar);
+
+
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
         mDrawerLayout = findViewById(R.id.drawer_layout);
+
         fragment = new HomeScreenFragment();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
-        final DatabaseViewModel databaseViewModel = ViewModelProviders.of(this).get(DatabaseViewModel.class);
 
+        final DatabaseViewModel databaseViewModel = ViewModelProviders.of(this).get(DatabaseViewModel.class);
         databaseViewModel.allFoods.observe(this, new Observer<List<Food>>() {
             @Override
             public void onChanged(@Nullable List<Food> foods) {
@@ -81,10 +91,13 @@ public class MainActivity extends AppCompatActivity
 
                         if (id == R.id.nav_food_list) {
                             fragment = new FoodFragment();
+                            toolbar.setTitle("Food");
                         } else if (id == R.id.nav_allergy_list) {
                             fragment = new AllergyFragment();
+                            toolbar.setTitle("Allergies");
                         } else if (id == R.id.nav_diet_list) {
                             fragment = new DietFragment();
+                            toolbar.setTitle("Diet");
                         }
 
                         setTitle(menuItem.getTitle());
@@ -103,8 +116,6 @@ public class MainActivity extends AppCompatActivity
                         return true;
                     }
                 });
-
-
 
         mDrawerLayout.addDrawerListener(
                 new DrawerLayout.DrawerListener() {
@@ -146,6 +157,7 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         String name = item.getName();
+        toolbar.setTitle(name);
         Bundle bundle = new Bundle();
         bundle.putString("name", name);
         FoodItemFragment foodItemFragment = new FoodItemFragment();

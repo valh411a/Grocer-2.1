@@ -19,9 +19,7 @@ import android.widget.TextView;
  */
 public class FoodItemFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnFragmentInteractionListener mListener;
     DatabaseViewModel databaseViewModel;
@@ -58,7 +56,7 @@ public class FoodItemFragment extends Fragment {
 
         TextView viewPiece = view.findViewById(R.id.food_name);
         viewPiece.setText(foodName);
-        getActivity().setTitle(foodName);
+
 
         if(savedInstanceState == null) {
             DietFragment foodItemDietList = new DietFragment();

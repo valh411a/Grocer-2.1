@@ -63,8 +63,6 @@ public class DietFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_diet_list, container, false);
 
-        getActivity().setTitle("Diets");
-
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
