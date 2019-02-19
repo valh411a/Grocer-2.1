@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity
         AllergyFragment.OnListFragmentInteractionListener,
         DietFragment.OnListFragmentInteractionListener,
         FoodItemFragment.OnFragmentInteractionListener,
-        DietItemFragment.OnFragmentInteractionListener {
+        DietItemFragment.OnFragmentInteractionListener,
+        AllergyItemFragment.OnFragmentInteractionListener {
 
     DrawerLayout mDrawerLayout;
     Fragment fragment = null;
@@ -163,7 +164,10 @@ public class MainActivity extends AppCompatActivity
         bundle.putString("name", name);
         FoodItemFragment foodItemFragment = new FoodItemFragment();
         foodItemFragment.setArguments(bundle);
-        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, foodItemFragment).addToBackStack(null).commit();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, foodItemFragment)
+                .addToBackStack(null)
+                .commit();
         onTopLevelNav = false;
 
     }
@@ -181,6 +185,19 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(Allergy item) {
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        String name = item.getName();
+        toolbar.setTitle(name);
+        Bundle bundle = new Bundle();
+        bundle.putString("name", name);
+        AllergyItemFragment allergyItemFragment = new AllergyItemFragment();
+        allergyItemFragment.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, allergyItemFragment)
+                .addToBackStack(null)
+                .commit();
+        onTopLevelNav = false;
+
     }
 
     @Override
@@ -193,7 +210,10 @@ public class MainActivity extends AppCompatActivity
         bundle.putString("name", name);
         DietItemFragment dietItemFragment = new DietItemFragment();
         dietItemFragment.setArguments(bundle);
-        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, dietItemFragment).addToBackStack(null).commit();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, dietItemFragment)
+                .addToBackStack(null)
+                .commit();
         onTopLevelNav = false;
 
     }
@@ -202,7 +222,10 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager.getBackStackEntryCount() >= 0) {
             fragment = new HomeScreenFragment();
-            fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .addToBackStack(null)
+                    .commit();
             onTopLevelNav = true;
         }else {
             super.onBackPressed();

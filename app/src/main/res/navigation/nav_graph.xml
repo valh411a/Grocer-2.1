@@ -39,10 +39,6 @@
         <action
             android:id="@+id/action_foodFragment_to_navigationDrawer"
             app:destination="@id/navigationDrawer" />
-        <action
-            android:id="@+id/back_button_food_list_to_home"
-            app:destination="@id/homeScreenFragment"
-            app:popUpTo="@+id/homeScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/allergyFragment"
@@ -52,9 +48,6 @@
         <action
             android:id="@+id/action_allergyFragment_to_navigationDrawer"
             app:destination="@id/navigationDrawer" />
-        <action
-            android:id="@+id/action_allergyFragment_to_homeScreenFragment"
-            app:destination="@id/homeScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/dietFragment"
@@ -64,8 +57,29 @@
         <action
             android:id="@+id/action_dietFragment_to_navigationDrawer"
             app:destination="@id/navigationDrawer" />
+    </fragment>
+    <fragment
+        android:id="@+id/dietItemFragment"
+        android:name="com.example.grocer21.DietItemFragment"
+        android:label="fragment_diet_item"
+        tools:layout="@layout/fragment_diet_item" >
         <action
-            android:id="@+id/action_dietFragment_to_homeScreenFragment"
-            app:destination="@id/homeScreenFragment" />
+            android:id="@+id/action_dietItemFragment_to_dietFragment"
+            app:destination="@id/dietFragment" />
+        <action
+            android:id="@+id/action_dietItemFragment_to_foodItemFragment"
+            app:destination="@id/foodItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodItemFragment"
+        android:name="com.example.grocer21.FoodItemFragment"
+        android:label="fragment_food_item"
+        tools:layout="@layout/fragment_food_item" >
+        <action
+            android:id="@+id/action_foodItemFragment_to_foodFragment"
+            app:destination="@id/foodFragment" />
+        <action
+            android:id="@+id/action_foodItemFragment_to_dietItemFragment"
+            app:destination="@id/dietItemFragment" />
     </fragment>
 </navigation>

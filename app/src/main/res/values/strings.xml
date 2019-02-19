@@ -25,4 +25,6 @@
     <string name="diet_item_food_title">Foods</string>
     <string name="diet_list_subtitle">The following foods are a good fit for this diet:</string>
     <string name="food_item_description">A brief description of the food item goes here that informs the user in the slight case they aren\'t sure what they clicked.</string>
+    <string name="allergy_description">A brief summary of the allergy goes here which describes it.</string>
+    <string name="allergy_food_list_subtitle">These foods are dangerous for this diet:</string>
 </resources>
