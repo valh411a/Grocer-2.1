@@ -3,6 +3,7 @@ package com.example.grocer21;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 
 import com.example.grocer21.Database.Diet;
 
+import java.util.Objects;
+
 import static android.widget.LinearLayout.VERTICAL;
 
 /**
@@ -24,12 +27,10 @@ import static android.widget.LinearLayout.VERTICAL;
  */
 public class DietFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private DietFragment.OnListFragmentInteractionListener mListener;
-    DatabaseViewModel databaseViewModel;
+    private DatabaseViewModel databaseViewModel;
 
     @Override
     public void onAttach(Context context) {
@@ -46,14 +47,14 @@ public class DietFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        databaseViewModel = ViewModelProviders.of(getActivity()).get(DatabaseViewModel.class);
+        databaseViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(DatabaseViewModel.class);
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_diet_list, container, false);
 
@@ -85,7 +86,6 @@ public class DietFragment extends Fragment {
     public DietFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static DietFragment newInstance(int columnCount) {
         DietFragment fragment = new DietFragment();
@@ -107,7 +107,6 @@ public class DietFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(Diet item);
     }
 }

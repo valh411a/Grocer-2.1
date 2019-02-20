@@ -3,10 +3,13 @@ package com.example.grocer21;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.Objects;
 
 
 /**
@@ -31,9 +34,9 @@ public class HomeScreenFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle("Home");
+        Objects.requireNonNull(getActivity()).setTitle("Home");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home_screen, container, false);
     }
@@ -49,10 +52,9 @@ public class HomeScreenFragment extends Fragment {
     }
 
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFragmentInteraction();
         }
     }
 
@@ -67,7 +69,7 @@ public class HomeScreenFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        @SuppressWarnings("EmptyMethod")
+        void onFragmentInteraction();
     }
 }

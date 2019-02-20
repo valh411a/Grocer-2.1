@@ -3,6 +3,7 @@ package com.example.grocer21;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 
 import com.example.grocer21.Database.Allergy;
 
+import java.util.Objects;
+
 import static android.widget.LinearLayout.VERTICAL;
 
 /**
@@ -24,10 +27,8 @@ import static android.widget.LinearLayout.VERTICAL;
  */
 public class AllergyFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    DatabaseViewModel databaseViewModel;
-    // TODO: Customize parameters
+    private DatabaseViewModel databaseViewModel;
     private int mColumnCount = 1;
     private AllergyFragment.OnListFragmentInteractionListener mListener;
 
@@ -46,7 +47,7 @@ public class AllergyFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        databaseViewModel = ViewModelProviders.of(getActivity()).get(DatabaseViewModel.class);
+        databaseViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(DatabaseViewModel.class);
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -55,7 +56,7 @@ public class AllergyFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_allergy_list, container, false);
 
@@ -89,7 +90,6 @@ public class AllergyFragment extends Fragment {
     public AllergyFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static AllergyFragment newInstance(int columnCount) {
         AllergyFragment fragment = new AllergyFragment();
@@ -111,7 +111,6 @@ public class AllergyFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(Allergy item);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.grocer21;
 
 import android.arch.lifecycle.LiveData;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,32 +12,33 @@ import com.example.grocer21.Database.Diet;
 import com.example.grocer21.DietFragment.OnListFragmentInteractionListener;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Diet} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
  */
 public class MyDietRecyclerViewAdapter extends RecyclerView.Adapter<MyDietRecyclerViewAdapter.ViewHolder> {
 
     private final LiveData<List<Diet>> dietList;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyDietRecyclerViewAdapter(LiveData<List<Diet>> items, OnListFragmentInteractionListener listener) {
+    MyDietRecyclerViewAdapter(LiveData<List<Diet>> items, OnListFragmentInteractionListener listener) {
         dietList = items;
         mListener = listener;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_diet, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = dietList.getValue().get(position);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        holder.mItem = Objects.requireNonNull(dietList.getValue()).get(position);
         holder.mIdView.setText(dietList.getValue().get(position).getName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -53,20 +55,21 @@ public class MyDietRecyclerViewAdapter extends RecyclerView.Adapter<MyDietRecycl
 
     @Override
     public int getItemCount() {
-        return dietList.getValue().size();
+        return Objects.requireNonNull(dietList.getValue()).size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public Diet mItem;
+        final View mView;
+        final TextView mIdView;
+        Diet mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
+            mIdView = view.findViewById(R.id.item_number);
         }
 
+        @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + "'";

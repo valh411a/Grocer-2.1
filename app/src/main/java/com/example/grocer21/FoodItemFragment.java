@@ -2,13 +2,15 @@ package com.example.grocer21;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.Objects;
 
 
 /**
@@ -20,10 +22,8 @@ import android.widget.TextView;
 public class FoodItemFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
-    private int mColumnCount = 1;
     private OnFragmentInteractionListener mListener;
-    DatabaseViewModel databaseViewModel;
-    String foodName;
+    private String foodName;
 
     @Override
     public void onAttach(Context context) {
@@ -40,16 +40,16 @@ public class FoodItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        foodName = this.getArguments().getString("name");
+        foodName = Objects.requireNonNull(this.getArguments()).getString("name");
 
-        databaseViewModel = ViewModelProviders.of(getActivity()).get(DatabaseViewModel.class);
+        DatabaseViewModel databaseViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(DatabaseViewModel.class);
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            int mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_food_item, container, false);
@@ -84,7 +84,7 @@ public class FoodItemFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static FoodItemFragment newInstance(int columnCount, String name) {
+    public static FoodItemFragment newInstance(int columnCount) {
         FoodItemFragment fragment = new FoodItemFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
@@ -103,7 +103,7 @@ public class FoodItemFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        @SuppressWarnings("EmptyMethod")
+        void onFragmentInteraction();
     }
 }

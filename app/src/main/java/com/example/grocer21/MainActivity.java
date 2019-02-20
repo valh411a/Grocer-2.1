@@ -2,14 +2,13 @@ package com.example.grocer21;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -23,6 +22,7 @@ import com.example.grocer21.Database.Diet;
 import com.example.grocer21.Database.Food;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity
         implements
@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout mDrawerLayout;
     Fragment fragment = null;
     FragmentManager fragmentManager = getSupportFragmentManager();
-    FragmentTransaction fragmentTransaction;
     boolean onTopLevelNav = true;
     Toolbar toolbar;
 
@@ -50,13 +49,12 @@ public class MainActivity extends AppCompatActivity
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(actionbar).setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         fragment = new HomeScreenFragment();
-        fragmentTransaction = fragmentManager.beginTransaction();
         fragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
 
         final DatabaseViewModel databaseViewModel = ViewModelProviders.of(this).get(DatabaseViewModel.class);
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         int id = menuItem.getItemId();
 
                         if (id == R.id.nav_food_list) {
@@ -101,12 +99,10 @@ public class MainActivity extends AppCompatActivity
                         mDrawerLayout.closeDrawers();
                         if (onTopLevelNav) {
                             if (fragment != null) {
-                                fragmentTransaction = fragmentManager.beginTransaction();
                                 fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
                                 onTopLevelNav = false;
                             }
                         } else {
-                            fragmentTransaction = fragmentManager.beginTransaction();
                             fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
                         }
 
@@ -117,17 +113,17 @@ public class MainActivity extends AppCompatActivity
         mDrawerLayout.addDrawerListener(
                 new DrawerLayout.DrawerListener() {
                     @Override
-                    public void onDrawerSlide(View drawerView, float slideOffset) {
+                    public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
                         // Respond when the drawer's position changes
                     }
 
                     @Override
-                    public void onDrawerOpened(View drawerView) {
+                    public void onDrawerOpened(@NonNull View drawerView) {
                         // Respond when the drawer is opened
                     }
 
                     @Override
-                    public void onDrawerClosed(View drawerView) {
+                    public void onDrawerClosed(@NonNull View drawerView) {
                         // Respond when the drawer is closed
                     }
 
@@ -169,11 +165,6 @@ public class MainActivity extends AppCompatActivity
                 .addToBackStack(null)
                 .commit();
         onTopLevelNav = false;
-
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
 
     }
 
@@ -232,4 +223,8 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public void onFragmentInteraction() {
+
+    }
 }

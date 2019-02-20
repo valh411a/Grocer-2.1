@@ -1,6 +1,7 @@
 package com.example.grocer21;
 
 import android.arch.lifecycle.LiveData;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +12,11 @@ import com.example.grocer21.AllergyFragment.OnListFragmentInteractionListener;
 import com.example.grocer21.Database.Allergy;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Allergy} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
  */
 public class MyAllergyRecyclerViewAdapter extends RecyclerView.Adapter<MyAllergyRecyclerViewAdapter.ViewHolder> {
 
@@ -27,16 +28,17 @@ public class MyAllergyRecyclerViewAdapter extends RecyclerView.Adapter<MyAllergy
         mListener = listener;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_allergy, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = allergyList.getValue().get(position);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        holder.mItem = Objects.requireNonNull(allergyList.getValue()).get(position);
         holder.mIdView.setText(allergyList.getValue().get(position).getName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -53,20 +55,21 @@ public class MyAllergyRecyclerViewAdapter extends RecyclerView.Adapter<MyAllergy
 
     @Override
     public int getItemCount() {
-        return allergyList.getValue().size();
+        return Objects.requireNonNull(allergyList.getValue()).size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public Allergy mItem;
+        final View mView;
+        final TextView mIdView;
+        Allergy mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
+            mIdView = view.findViewById(R.id.item_number);
         }
 
+        @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + "'";

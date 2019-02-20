@@ -13,15 +13,16 @@ public class Allergy {
     @ColumnInfo(name = "name")
     private String name;
 
-    public Allergy(String name) {
+    public Allergy(@NonNull String name) {
         this.name = name;
     }
 
+    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 }

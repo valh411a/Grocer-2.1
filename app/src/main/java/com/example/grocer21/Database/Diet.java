@@ -13,15 +13,16 @@ public class Diet {
     @ColumnInfo(name = "name")
     private String name;
 
-    public Diet(String name) {
+    public Diet(@NonNull String name) {
         this.name = name;
     }
 
+    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 }

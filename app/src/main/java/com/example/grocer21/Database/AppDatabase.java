@@ -30,7 +30,7 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static RoomDatabase.Callback appDatabaseCallback = new RoomDatabase.Callback(){
+    private static final RoomDatabase.Callback appDatabaseCallback = new RoomDatabase.Callback(){
 
                 @Override
                 public void onOpen (@NonNull SupportSQLiteDatabase db) {

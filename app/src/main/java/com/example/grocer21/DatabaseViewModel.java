@@ -12,9 +12,9 @@ import com.example.grocer21.Database.Food;
 
 import java.util.List;
 
-public class DatabaseViewModel extends AndroidViewModel {
+class DatabaseViewModel extends AndroidViewModel {
 
-    private AppRepository appRepository;
+    private final AppRepository appRepository;
     public final LiveData<List<Food>> allFoods;
     public final LiveData<List<Allergy>> allAllergies;
     public final LiveData<List<Diet>> allDiets;

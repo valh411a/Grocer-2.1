@@ -9,13 +9,13 @@ import java.util.List;
 
 public class AppRepository {
 
-    private FoodDao foodDao;
-    private AllergyDao allergyDao;
-    private DietDao dietDao;
+    private final FoodDao foodDao;
+    private final AllergyDao allergyDao;
+    private final DietDao dietDao;
 
-    private LiveData<List<Food>> allFoods;
-    private LiveData<List<Allergy>> allAllergies;
-    private LiveData<List<Diet>> allDiets;
+    private final LiveData<List<Food>> allFoods;
+    private final LiveData<List<Allergy>> allAllergies;
+    private final LiveData<List<Diet>> allDiets;
 
     public AppRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
