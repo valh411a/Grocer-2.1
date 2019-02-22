@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity
         DietItemFragment.OnFragmentInteractionListener,
         AllergyItemFragment.OnFragmentInteractionListener {
 
-    DrawerLayout mDrawerLayout;
-    Fragment fragment = null;
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    boolean onTopLevelNav = true;
-    Toolbar toolbar;
+    private DrawerLayout mDrawerLayout;
+    private Fragment fragment = null;
+    private final FragmentManager fragmentManager = getSupportFragmentManager();
+    private boolean onTopLevelNav = true;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

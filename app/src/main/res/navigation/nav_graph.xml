@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeScreenFragment">
+
+    <fragment
+        android:id="@+id/homeScreenFragment"
+        android:name="com.example.grocer21.HomeScreenFragment"
+        android:label="fragment_home_screen"
+        tools:layout="@layout/fragment_home_screen" >
+        <action
+            android:id="@+id/action_homeScreenFragment_to_HelpDialogFragment"
+            app:destination="@id/HelpDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/HelpDialogFragment"
+        android:name="com.example.grocer21.HomeScreenFragment"
+        android:label="fragment_help_dialog"
+        tools:layout="@layout/fragment_home_screen" />
+    <fragment
+        android:id="@+id/MainActivity"
+        android:name="com.example.grocer21.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" >
+        <action
+            android:id="@+id/action_MainActivity_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
+        <action
+            android:id="@+id/action_MainActivity_to_foodFragment"
+            app:destination="@id/foodFragment" />
+        <action
+            android:id="@+id/action_MainActivity_to_dietFragment"
+            app:destination="@id/dietFragment" />
+        <action
+            android:id="@+id/action_MainActivity_to_allergyFragment"
+            app:destination="@id/allergyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allergyFragment"
+        android:name="com.example.grocer21.AllergyFragment"
+        android:label="fragment_allergy_list"
+        tools:layout="@layout/fragment_allergy_list" >
+        <action
+            android:id="@+id/action_allergyFragment_to_allergyItemFragment"
+            app:destination="@id/allergyItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dietFragment"
+        android:name="com.example.grocer21.DietFragment"
+        android:label="fragment_diet_list"
+        tools:layout="@layout/fragment_diet_list" >
+        <action
+            android:id="@+id/action_dietFragment_to_dietItemFragment"
+            app:destination="@id/dietItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodFragment"
+        android:name="com.example.grocer21.FoodFragment"
+        android:label="fragment_food_list"
+        tools:layout="@layout/fragment_food_list" >
+        <action
+            android:id="@+id/action_foodFragment_to_foodItemFragment"
+            app:destination="@id/foodItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allergyItemFragment"
+        android:name="com.example.grocer21.AllergyItemFragment"
+        android:label="fragment_allergy_item"
+        tools:layout="@layout/fragment_allergy_item" >
+        <action
+            android:id="@+id/action_allergyItemFragment_to_foodItemFragment"
+            app:destination="@id/foodItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dietItemFragment"
+        android:name="com.example.grocer21.DietItemFragment"
+        android:label="fragment_diet_item"
+        tools:layout="@layout/fragment_diet_item" >
+        <action
+            android:id="@+id/action_dietItemFragment_to_foodItemFragment"
+            app:destination="@id/foodItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodItemFragment"
+        android:name="com.example.grocer21.FoodItemFragment"
+        android:label="fragment_food_item"
+        tools:layout="@layout/fragment_food_item" >
+        <action
+            android:id="@+id/action_foodItemFragment_to_dietItemFragment"
+            app:destination="@id/dietItemFragment" />
+        <action
+            android:id="@+id/action_foodItemFragment_to_allergyItemFragment"
+            app:destination="@id/allergyItemFragment" />
+    </fragment>
+</navigation>
