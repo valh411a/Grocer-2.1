@@ -2,6 +2,7 @@ package com.example.grocer21;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,7 +33,9 @@ public class MainActivity extends AppCompatActivity
         DietFragment.OnListFragmentInteractionListener,
         FoodItemFragment.OnFragmentInteractionListener,
         DietItemFragment.OnFragmentInteractionListener,
-        AllergyItemFragment.OnFragmentInteractionListener {
+        AllergyItemFragment.OnFragmentInteractionListener,
+        AllergyListContainer.OnFragmentInteractionListener,
+        FoodListContainer.OnFragmentInteractionListener{
 
     private DrawerLayout mDrawerLayout;
     private Fragment fragment = null;
@@ -85,10 +88,10 @@ public class MainActivity extends AppCompatActivity
                         int id = menuItem.getItemId();
 
                         if (id == R.id.nav_food_list) {
-                            fragment = new FoodFragment();
+                            fragment = new FoodListContainer();
                             toolbar.setTitle("Food");
                         } else if (id == R.id.nav_allergy_list) {
-                            fragment = new AllergyFragment();
+                            fragment = new AllergyListContainer();
                             toolbar.setTitle("Allergies");
                         } else if (id == R.id.nav_diet_list) {
                             fragment = new DietFragment();
@@ -225,6 +228,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction() {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }
