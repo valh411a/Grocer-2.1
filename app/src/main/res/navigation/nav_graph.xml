@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeScreenFragment">
+    app:startDestination="@id/MainActivity">
 
     <fragment
         android:id="@+id/homeScreenFragment"
@@ -34,17 +34,8 @@
             android:id="@+id/action_MainActivity_to_foodListContainer"
             app:destination="@id/foodListContainer" />
         <action
-            android:id="@+id/action_MainActivity_to_dietFragment"
-            app:destination="@id/dietFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/dietFragment"
-        android:name="com.example.grocer21.DietFragment"
-        android:label="fragment_diet_list"
-        tools:layout="@layout/fragment_diet_list" >
-        <action
-            android:id="@+id/action_dietFragment_to_dietItemFragment"
-            app:destination="@id/dietItemFragment" />
+            android:id="@+id/action_MainActivity_to_dietListContainer"
+            app:destination="@id/dietListContainer" />
     </fragment>
     <fragment
         android:id="@+id/allergyItemFragment"
@@ -93,5 +84,14 @@
         <action
             android:id="@+id/action_foodListContainer_to_foodItemFragment"
             app:destination="@id/foodItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dietListContainer"
+        android:name="com.example.grocer21.DietListContainer"
+        android:label="fragment_diet_list_container"
+        tools:layout="@layout/fragment_diet_list_container" >
+        <action
+            android:id="@+id/action_dietListContainer_to_dietItemFragment"
+            app:destination="@id/dietItemFragment" />
     </fragment>
 </navigation>

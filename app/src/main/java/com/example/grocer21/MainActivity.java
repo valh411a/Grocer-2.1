@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity
         DietItemFragment.OnFragmentInteractionListener,
         AllergyItemFragment.OnFragmentInteractionListener,
         AllergyListContainer.OnFragmentInteractionListener,
-        FoodListContainer.OnFragmentInteractionListener{
+        FoodListContainer.OnFragmentInteractionListener,
+        DietListContainer.OnFragmentInteractionListener {
 
     private DrawerLayout mDrawerLayout;
     private Fragment fragment = null;
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity
                             fragment = new AllergyListContainer();
                             toolbar.setTitle("Allergies");
                         } else if (id == R.id.nav_diet_list) {
-                            fragment = new DietFragment();
+                            fragment = new DietListContainer();
                             toolbar.setTitle("Diet");
                         }
 

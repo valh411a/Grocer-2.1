@@ -30,7 +30,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="DIET NAME HERE" />
+            tools:text="DIET NAME" />
 
         <TextView
             android:id="@+id/dietDescription"

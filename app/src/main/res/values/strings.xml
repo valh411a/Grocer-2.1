@@ -25,4 +25,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name:</string>
+    <string name="white_bread">White Bread</string>
+    <string name="upc_code">UPC Code</string>
+    <string name="_123456789012">123456789012</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
 </resources>
