@@ -8,4 +8,8 @@ import android.arch.persistence.room.PrimaryKey
 data class Diets(
         @PrimaryKey val dietID: Int,
         @ColumnInfo(name = "diet_type") val dietType: String?
-)
+) {
+    fun getName(): String? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}

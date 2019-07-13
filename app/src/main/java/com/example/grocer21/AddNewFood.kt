@@ -1,8 +1,9 @@
 package com.example.grocer21
 
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.TextUtils
@@ -11,9 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-
-import android.app.Activity.RESULT_CANCELED
-import android.app.Activity.RESULT_OK
 
 
 /**
@@ -24,9 +22,9 @@ import android.app.Activity.RESULT_OK
  */
 class AddNewFood : Fragment() {
 
+    private lateinit var mEditFoodUPCView: EditText
+    private lateinit var mEditFoodNameView: EditText
     private var mListener: OnFragmentInteractionListener? = null
-    internal var mEditFoodNameView: EditText
-    internal var mEditFoodUPCView: EditText
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -63,13 +61,6 @@ class AddNewFood : Fragment() {
         return view
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null) {
-            mListener!!.onFragmentInteraction(uri)
-        }
-    }
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
@@ -93,8 +84,5 @@ class AddNewFood : Fragment() {
      *
      * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
      */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
+    interface OnFragmentInteractionListener
 }// Required empty public constructor

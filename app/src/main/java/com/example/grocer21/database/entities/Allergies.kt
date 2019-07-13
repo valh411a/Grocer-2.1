@@ -8,4 +8,8 @@ import android.arch.persistence.room.PrimaryKey
 data class Allergies(
         @PrimaryKey val allergyID: Int,
         @ColumnInfo(name = "allergy_type") val allergyType: String?
-)
+) {
+    fun getName(): String? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}

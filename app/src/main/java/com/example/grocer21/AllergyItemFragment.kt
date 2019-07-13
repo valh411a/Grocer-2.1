@@ -33,11 +33,11 @@ class AllergyItemFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        allergyName = Objects.requireNonNull(this.arguments).getString("name")
+        allergyName = (this.arguments)?.getString("name")
 
-        val databaseViewModel = ViewModelProviders.of(Objects.requireNonNull(activity)).get<DatabaseViewModel>(DatabaseViewModel::class.java!!)
+        (activity)?.let { ViewModelProviders.of(it).get(DatabaseViewModel::class.java) }
         if (arguments != null) {
-            val mColumnCount = arguments!!.getInt(ARG_COLUMN_COUNT)
+            arguments!!.getInt(ARG_COLUMN_COUNT)
         }
     }
 
@@ -79,14 +79,7 @@ class AllergyItemFragment : Fragment() {
 
     companion object {
 
-        private val ARG_COLUMN_COUNT = "column-count"
+        private const val ARG_COLUMN_COUNT = "column-count"
 
-        fun newInstance(columnCount: Int): AllergyItemFragment {
-            val fragment = AllergyItemFragment()
-            val args = Bundle()
-            args.putInt(ARG_COLUMN_COUNT, columnCount)
-            fragment.arguments = args
-            return fragment
-        }
     }
 }// Required empty public constructor

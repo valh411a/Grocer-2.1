@@ -33,11 +33,11 @@ class DietItemFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dietName = Objects.requireNonNull(this.arguments).getString("name")
+        dietName = (this.arguments)?.getString("name")
 
-        val databaseViewModel = ViewModelProviders.of(Objects.requireNonNull(activity)).get<DatabaseViewModel>(DatabaseViewModel::class.java!!)
+        (activity)?.let { ViewModelProviders.of(it).get(DatabaseViewModel::class.java) }
         if (arguments != null) {
-            val mColumnCount = arguments!!.getInt(ARG_COLUMN_COUNT)
+            arguments!!.getInt(ARG_COLUMN_COUNT)
         }
     }
 
@@ -80,14 +80,7 @@ class DietItemFragment : Fragment() {
 
     companion object {
 
-        private val ARG_COLUMN_COUNT = "column-count"
+        private const val ARG_COLUMN_COUNT = "column-count"
 
-        fun newinstance(columnCount: Int): DietItemFragment {
-            val fragment = DietItemFragment()
-            val args = Bundle()
-            args.putInt(ARG_COLUMN_COUNT, columnCount)
-            fragment.arguments = args
-            return fragment
-        }
     }
 }// Required empty public constructor

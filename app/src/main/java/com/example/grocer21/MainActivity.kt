@@ -12,12 +12,22 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
-import com.example.grocer21.database.Allergy
-import com.example.grocer21.database.Diet
-import com.example.grocer21.database.Food
+import com.example.grocer21.database.entities.Allergies
+import com.example.grocer21.database.entities.Diets
+import com.example.grocer21.database.entities.Foods
 import java.util.*
 
-class MainActivity : AppCompatActivity(), FoodFragment.OnListFragmentInteractionListener, HomeScreenFragment.OnFragmentInteractionListener, AllergyFragment.OnListFragmentInteractionListener, DietFragment.OnListFragmentInteractionListener, FoodItemFragment.OnFragmentInteractionListener, DietItemFragment.OnFragmentInteractionListener, AllergyItemFragment.OnFragmentInteractionListener, AllergyListContainer.OnFragmentInteractionListener, FoodListContainer.OnFragmentInteractionListener, DietListContainer.OnFragmentInteractionListener {
+class MainActivity : AppCompatActivity(),
+        FoodFragment.OnListFragmentInteractionListener,
+        HomeScreenFragment.OnFragmentInteractionListener,
+        AllergyFragment.OnListFragmentInteractionListener,
+        DietFragment.OnListFragmentInteractionListener,
+        FoodItemFragment.OnFragmentInteractionListener,
+        DietItemFragment.OnFragmentInteractionListener,
+        AllergyItemFragment.OnFragmentInteractionListener,
+        AllergyListContainer.OnFragmentInteractionListener,
+        FoodListContainer.OnFragmentInteractionListener,
+        DietListContainer.OnFragmentInteractionListener {
 
     private var mDrawerLayout: DrawerLayout? = null
     private var fragment: Fragment? = null
@@ -33,7 +43,7 @@ class MainActivity : AppCompatActivity(), FoodFragment.OnListFragmentInteraction
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         val actionbar = supportActionBar
-        Objects.requireNonNull(actionbar).setDisplayHomeAsUpEnabled(true)
+        (actionbar)?.setDisplayHomeAsUpEnabled(true)
         actionbar!!.setHomeAsUpIndicator(R.drawable.ic_menu)
 
         mDrawerLayout = findViewById(R.id.drawer_layout)
@@ -41,40 +51,33 @@ class MainActivity : AppCompatActivity(), FoodFragment.OnListFragmentInteraction
         fragment = HomeScreenFragment()
         fragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment!!).commit()
 
-        val databaseViewModel = ViewModelProviders.of(this).get(DatabaseViewModel::class.java!!)
-        databaseViewModel.allFoods.observe(this, object : Observer<List<Food>> {
-            override fun onChanged(t: List<Food>?) {
-                foods: List<Food>?
-            }
-
-            override fun onChanged(foods: List<Food>?) {
-
-            }
+        val databaseViewModel = ViewModelProviders.of(this).get(DatabaseViewModel::class.java)
+        databaseViewModel.allFoods.observe(this, Observer<List<Foods>> {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         })
-        databaseViewModel.allAllergies.observe(this, object : Observer<List<Allergy>> {
-            override fun onChanged(allergies: List<Allergy>?) {
-
-            }
+        databaseViewModel.allAllergies.observe(this, Observer<List<Allergies>> {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         })
-        databaseViewModel.allDiets.observe(this, object : Observer<List<Diet>> {
-            override fun onChanged(diets: List<Diet>?) {
-
-            }
+        databaseViewModel.allDiets.observe(this, Observer<List<Diets>> {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         })
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
-            val id = menuItem.itemId
 
-            if (id == R.id.nav_food_list) {
-                fragment = FoodListContainer()
-                toolbar!!.title = "Foods"
-            } else if (id == R.id.nav_allergy_list) {
-                fragment = AllergyListContainer()
-                toolbar!!.title = "Allergies"
-            } else if (id == R.id.nav_diet_list) {
-                fragment = DietListContainer()
-                toolbar!!.title = "Diet"
+            when (menuItem.itemId) {
+                R.id.nav_food_list -> {
+                    fragment = FoodListContainer()
+                    toolbar!!.title = "Foods"
+                }
+                R.id.nav_allergy_list -> {
+                    fragment = AllergyListContainer()
+                    toolbar!!.title = "Allergies"
+                }
+                R.id.nav_diet_list -> {
+                    fragment = DietListContainer()
+                    toolbar!!.title = "Diet"
+                }
             }
 
             title = menuItem.title
@@ -127,11 +130,11 @@ class MainActivity : AppCompatActivity(), FoodFragment.OnListFragmentInteraction
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onListFragmentInteraction(item: Food) {
+    override fun onListFragmentInteraction(item: Foods) {
 
         val fragmentManager = supportFragmentManager
         val name = item.getName()
-        toolbar!!.setTitle(name)
+        toolbar!!.title = name
         val bundle = Bundle()
         bundle.putString("name", name)
         val foodItemFragment = FoodItemFragment()
@@ -144,16 +147,16 @@ class MainActivity : AppCompatActivity(), FoodFragment.OnListFragmentInteraction
 
     }
 
-    fun displayHelp(view: View) {
+    fun displayHelp() {
         val newHelpFragment = HelpDialogFragment()
         newHelpFragment.show(supportFragmentManager, "HelpDialog")
     }
 
-    override fun onListFragmentInteraction(item: Allergy) {
+    override fun onListFragmentInteraction(item: Allergies) {
 
         val fragmentManager = supportFragmentManager
         val name = item.getName()
-        toolbar!!.setTitle(name)
+        toolbar!!.title = name
         val bundle = Bundle()
         bundle.putString("name", name)
         val allergyItemFragment = AllergyItemFragment()
@@ -166,11 +169,11 @@ class MainActivity : AppCompatActivity(), FoodFragment.OnListFragmentInteraction
 
     }
 
-    override fun onListFragmentInteraction(item: Diet) {
+    override fun onListFragmentInteraction(item: Diets) {
 
         val fragmentManager = supportFragmentManager
         val name = item.getName()
-        toolbar!!.setTitle(name)
+        toolbar!!.title = name
         val bundle = Bundle()
         bundle.putString("name", name)
         val dietItemFragment = DietItemFragment()
