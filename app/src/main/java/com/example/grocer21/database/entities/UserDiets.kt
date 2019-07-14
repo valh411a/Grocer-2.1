@@ -4,7 +4,8 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.PrimaryKey
 
-@Entity(foreignKeys = [
+@Entity(primaryKeys = ["userID", "dietID"],
+        foreignKeys = [
     ForeignKey(
             entity = Profile::class,
             parentColumns = arrayOf("userID"),
@@ -16,6 +17,6 @@ import android.arch.persistence.room.PrimaryKey
     )
 ])
 data class UserDiets (
-        @PrimaryKey val userID: Int,
-        @PrimaryKey val dietID: Int
+        val userID: Int,
+        val dietID: Int
 )

@@ -29,16 +29,24 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun userAllergiesDao(): UserAllergiesDao
     abstract fun userDietsDao(): UserDietsDao
 
-    private var instance: AppDatabase? = null
-    fun getDatabase(context: Context): AppDatabase? {
-        if (instance == null)
-        {
-            synchronized (AppDatabase::class) {
-                instance = Room.databaseBuilder(context.applicationContext,
-                        AppDatabase::class.java, "word_database")
-                        .build()
+    companion object {
+        @Volatile
+        private var instance: AppDatabase? = null
+
+        fun getDatabase(context: Context): AppDatabase {
+            val tempInstance = instance
+            if (tempInstance != null) {
+                return tempInstance
+            }
+            synchronized(this) {
+                val mInstance = Room.databaseBuilder(
+                        context.applicationContext,
+                        AppDatabase::class.java,
+                        "App_database"
+                ).build()
+                instance = mInstance
+                return mInstance
             }
         }
-        return instance
     }
 }

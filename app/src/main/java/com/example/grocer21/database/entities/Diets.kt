@@ -10,6 +10,6 @@ data class Diets(
         @ColumnInfo(name = "diet_type") val dietType: String?
 ) {
     fun getName(): String? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return dietType
     }
 }

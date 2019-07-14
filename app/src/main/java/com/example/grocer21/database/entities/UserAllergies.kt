@@ -2,9 +2,9 @@ package com.example.grocer21.database.entities
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.ForeignKey
-import android.arch.persistence.room.PrimaryKey
 
-@Entity(foreignKeys = [
+@Entity(primaryKeys = ["userID", "allergyID"],
+        foreignKeys = [
     ForeignKey(
             entity = Profile::class,
             parentColumns = arrayOf("userID"),
@@ -16,6 +16,6 @@ import android.arch.persistence.room.PrimaryKey
     )
 ])
 data class UserAllergies (
-        @PrimaryKey val userID: Int,
-        @PrimaryKey val allergyID: Int
+        val userID: Int,
+        val allergyID: Int
 )

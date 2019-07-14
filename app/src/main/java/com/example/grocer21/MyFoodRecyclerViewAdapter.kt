@@ -17,6 +17,7 @@ import java.util.Objects
  */
 class MyFoodRecyclerViewAdapter(private val foodList: LiveData<List<Foods>>, private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<MyFoodRecyclerViewAdapter.ViewHolder>() {
 
+    private var foods = emptyList<Foods>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.fragment_food, parent, false)
@@ -32,6 +33,10 @@ class MyFoodRecyclerViewAdapter(private val foodList: LiveData<List<Foods>>, pri
         }
     }
 
+    internal fun setFoods(foods: List<Foods>) {
+        this.foods = foods
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int {
         return Objects.requireNonNull<List<Foods>>(foodList.value).size
     }

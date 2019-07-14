@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity(),
     private val fragmentManager = supportFragmentManager
     private var onTopLevelNav = true
     private var toolbar: Toolbar? = null
+    private lateinit var databaseViewModel: DatabaseViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,12 +53,13 @@ class MainActivity : AppCompatActivity(),
         fragment = HomeScreenFragment()
         fragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment!!).commit()
 
-        val databaseViewModel = ViewModelProviders.of(this).get(DatabaseViewModel::class.java)
-        databaseViewModel.allFoods.observe(this, Observer<List<Foods>> {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        databaseViewModel = ViewModelProviders.of(this).get(DatabaseViewModel::class.java)
+
+        databaseViewModel.allFoods.observe(this, Observer {foods ->
+            foods?.let {MyFoodRecyclerViewAdapter.setFoods(it)}
         })
-        databaseViewModel.allAllergies.observe(this, Observer<List<Allergies>> {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        databaseViewModel.allAllergies.observe(this, Observer {foods ->
+            foods?.let {MyFoodRecyclerViewAdapter.setFoods(it)}
         })
         databaseViewModel.allDiets.observe(this, Observer<List<Diets>> {
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
