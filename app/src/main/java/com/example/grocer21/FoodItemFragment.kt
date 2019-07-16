@@ -52,8 +52,8 @@ class FoodItemFragment : Fragment() {
 
 
         if (savedInstanceState == null) {
-            val foodItemDietList = DietFragment()
-            val foodItemAllergyList = AllergyFragment()
+            val foodItemDietList = DietListFragment()
+            val foodItemAllergyList = AllergyListFragment()
             childFragmentManager
                     .beginTransaction()
                     .add(R.id.list_a_container, foodItemDietList)

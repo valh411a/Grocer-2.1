@@ -12,7 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout.VERTICAL
-import com.example.grocer21.database.entities.Allergies
+import com.example.grocer21.database.entities.Foods
 
 /**
  * A fragment representing a list of Items.
@@ -25,10 +25,11 @@ import com.example.grocer21.database.entities.Allergies
  * Mandatory empty constructor for the fragment manager to instantiate the
  * fragment (e.g. upon screen orientation changes).
  */
-class AllergyFragment : Fragment() {
-    private var databaseViewModel: DatabaseViewModel? = null
+class FoodListFragment : Fragment() {
     private var mColumnCount = 1
     private var mListener: OnListFragmentInteractionListener? = null
+    private var databaseViewModel: DatabaseViewModel? = null
+
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -46,14 +47,11 @@ class AllergyFragment : Fragment() {
         if (arguments != null) {
             mColumnCount = arguments!!.getInt(ARG_COLUMN_COUNT)
         }
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_allergy_list, container, false)
-
+        val view = inflater.inflate(R.layout.fragment_food_list, container, false)
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -64,7 +62,7 @@ class AllergyFragment : Fragment() {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
             view.addItemDecoration(DividerItemDecoration(view.context, VERTICAL))
-            view.adapter = MyAllergyRecyclerViewAdapter(databaseViewModel!!.allAllergies, mListener)
+            view.adapter = this.context?.let { FoodListAdapter(it) }
         }
         return view
     }
@@ -85,7 +83,7 @@ class AllergyFragment : Fragment() {
      * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
      */
     interface OnListFragmentInteractionListener {
-        fun onListFragmentInteraction(item: Allergies)
+        fun onListFragmentInteraction(item: Foods)
     }
 
     companion object {

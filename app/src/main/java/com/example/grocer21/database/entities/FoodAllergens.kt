@@ -16,6 +16,6 @@ import android.arch.persistence.room.ForeignKey
             )
         ])
 data class FoodAllergens (
-        val upc: Int,
+        val upc: Long,
         val allergyID: Int
 )

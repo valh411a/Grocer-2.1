@@ -18,5 +18,5 @@ import android.arch.persistence.room.PrimaryKey
 ])
 data class ShoppingList (
         val userID: Int,
-        val upc: Int
+        val upc: Long
 )

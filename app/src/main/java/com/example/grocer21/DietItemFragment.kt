@@ -50,7 +50,7 @@ class DietItemFragment : Fragment() {
         viewPiece.text = dietName
 
         if (savedInstanceState == null) {
-            val dietItemFoodList = FoodFragment()
+            val dietItemFoodList = FoodListFragment()
             childFragmentManager
                     .beginTransaction()
                     .add(R.id.list_a_container, dietItemFoodList)

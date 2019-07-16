@@ -1,17 +1,14 @@
 package com.example.grocer21
 
-import android.app.Activity.RESULT_CANCELED
-import android.app.Activity.RESULT_OK
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 
 
 /**
@@ -24,7 +21,12 @@ class AddNewFood : Fragment() {
 
     private lateinit var mEditFoodUPCView: EditText
     private lateinit var mEditFoodNameView: EditText
-    private var mListener: OnFragmentInteractionListener? = null
+    private var mListener: OnSaveButtonPressedListener? = null
+    internal lateinit var callback: OnSaveButtonPressedListener
+
+    fun setOnSaveButtonPressedListener(callback: OnSaveButtonPressedListener) {
+        this.callback = callback
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -35,27 +37,26 @@ class AddNewFood : Fragment() {
         mEditFoodUPCView = view.findViewById(R.id.add_food_upc_entry)
         val saveButton = view.findViewById<Button>(R.id.add_button)
         val cancelButton = view.findViewById<Button>(R.id.cancel_button)
+        var buttonPressed: String
         val extras = Bundle()
 
         saveButton.setOnClickListener {
-            val replyIntent = Intent()
-            if (TextUtils.isEmpty(mEditFoodNameView.text)) {
-                activity!!.setResult(RESULT_CANCELED, replyIntent)
+            buttonPressed = "save"
+            extras.putString("button pressed", buttonPressed)
+            if (mEditFoodNameView.text.toString() != "" && mEditFoodUPCView.text.toString() != "") {
+                extras.putString("name", mEditFoodNameView.text.toString())
+                extras.putLong("upc", mEditFoodUPCView.text.toString().toLong())
+                callback.onNewFoodSaved(extras)
             } else {
-                val food = mEditFoodNameView.text.toString()
-                val upc = java.lang.Long.parseLong(mEditFoodUPCView.text.toString())
-                extras.putString("FOOD_NAME", food)
-                extras.putLong("UPC_CODE", upc)
-                replyIntent.putExtras(extras)
-                activity!!.setResult(RESULT_OK, replyIntent)
+                Toast.makeText(view.context, "You cannot add empty foods. Press cancel to go back.", Toast.LENGTH_SHORT).show()
             }
-            activity!!.finish()
         }
 
         cancelButton.setOnClickListener {
-            val replyIntent = Intent()
-            activity!!.setResult(RESULT_CANCELED, replyIntent)
-            activity!!.finish()
+            buttonPressed = "cancel"
+            extras.putString("button pressed", buttonPressed)
+            activity?.supportFragmentManager?.popBackStack()
+
         }
 
         return view
@@ -63,7 +64,7 @@ class AddNewFood : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
+        if (context is OnSaveButtonPressedListener) {
             mListener = context
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
@@ -84,5 +85,10 @@ class AddNewFood : Fragment() {
      *
      * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
      */
-    interface OnFragmentInteractionListener
+    interface OnSaveButtonPressedListener {
+        fun onNewFoodSaved(position: Bundle) {
+
+        }
+
+    }
 }// Required empty public constructor

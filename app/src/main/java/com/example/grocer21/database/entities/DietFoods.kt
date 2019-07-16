@@ -3,6 +3,9 @@ package com.example.grocer21.database.entities
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.ForeignKey
 
+/**
+ * Entity representation of the "DietFoods" table in the database
+ */
 @Entity(primaryKeys = ["dietID", "upc"],
         foreignKeys = [
             ForeignKey(
@@ -15,7 +18,15 @@ import android.arch.persistence.room.ForeignKey
                     childColumns = arrayOf("upc")
             )
         ])
-data class DietFoods (
+data class DietFoods(
+
+        /**
+         * foreign key representing the [Diets] table
+         */
         val dietID: Int,
-        val upc: Int
+
+        /**
+         * foreign key representing the [Foods] table
+         */
+        val upc: Long
 )

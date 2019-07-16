@@ -1,7 +1,6 @@
 package com.example.grocer21
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -9,32 +8,36 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import androidx.lifecycle.ViewModel
 import com.example.grocer21.database.entities.Allergies
 import com.example.grocer21.database.entities.Diets
 import com.example.grocer21.database.entities.Foods
-import java.util.*
 
 class MainActivity : AppCompatActivity(),
-        FoodFragment.OnListFragmentInteractionListener,
+        FoodListFragment.OnListFragmentInteractionListener,
         HomeScreenFragment.OnFragmentInteractionListener,
-        AllergyFragment.OnListFragmentInteractionListener,
-        DietFragment.OnListFragmentInteractionListener,
+        AllergyListFragment.OnListFragmentInteractionListener,
+        DietListFragment.OnListFragmentInteractionListener,
         FoodItemFragment.OnFragmentInteractionListener,
         DietItemFragment.OnFragmentInteractionListener,
         AllergyItemFragment.OnFragmentInteractionListener,
         AllergyListContainer.OnFragmentInteractionListener,
         FoodListContainer.OnFragmentInteractionListener,
-        DietListContainer.OnFragmentInteractionListener {
+        DietListContainer.OnFragmentInteractionListener,
+        AddNewFood.OnSaveButtonPressedListener {
+
 
     private var mDrawerLayout: DrawerLayout? = null
     private var fragment: Fragment? = null
     private val fragmentManager = supportFragmentManager
     private var onTopLevelNav = true
     private var toolbar: Toolbar? = null
-    private lateinit var databaseViewModel: DatabaseViewModel
+    private lateinit var databaseViewModel: ViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,17 +56,40 @@ class MainActivity : AppCompatActivity(),
         fragment = HomeScreenFragment()
         fragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment!!).commit()
 
-        databaseViewModel = ViewModelProviders.of(this).get(DatabaseViewModel::class.java)
+        databaseViewModel = DatabaseViewModel(application)
 
-        databaseViewModel.allFoods.observe(this, Observer {foods ->
-            foods?.let {MyFoodRecyclerViewAdapter.setFoods(it)}
-        })
-        databaseViewModel.allAllergies.observe(this, Observer {foods ->
-            foods?.let {MyFoodRecyclerViewAdapter.setFoods(it)}
-        })
-        databaseViewModel.allDiets.observe(this, Observer<List<Diets>> {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        })
+        if (findViewById<RecyclerView>(R.id.foodRecyclerView) != null) {
+            val recyclerView = findViewById<RecyclerView>(R.id.foodRecyclerView)!!
+            val foodAdapter = FoodListAdapter(this)
+            recyclerView.adapter = foodAdapter
+            recyclerView.layoutManager = LinearLayoutManager(this)
+
+            (databaseViewModel as DatabaseViewModel).allFoods.observe(this, Observer { foods ->
+                foods?.let { foodAdapter.setFoods(it) }
+            })
+        }
+
+        if (findViewById<RecyclerView>(R.id.allergyRecyclerView) != null) {
+            val recyclerView = findViewById<RecyclerView>(R.id.allergyRecyclerView)!!
+            val allergyAdapter = AllergyListAdapter(this)
+            recyclerView.adapter = allergyAdapter
+            recyclerView.layoutManager = LinearLayoutManager(this)
+
+            (databaseViewModel as DatabaseViewModel).allAllergies.observe(this, Observer { allergies ->
+                allergies?.let { allergyAdapter.setAllergies(it) }
+            })
+        }
+
+        if (findViewById<RecyclerView>(R.id.dietRecyclerView) != null) {
+            val recyclerView = findViewById<RecyclerView>(R.id.dietRecyclerView)!!
+            val dietAdapter = DietListAdapter(this)
+            recyclerView.adapter = dietAdapter
+            recyclerView.layoutManager = LinearLayoutManager(this)
+
+            (databaseViewModel as DatabaseViewModel).allDiets.observe(this, Observer { diets ->
+                diets?.let { dietAdapter.setDiets(it) }
+            })
+        }
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
@@ -89,6 +115,8 @@ class MainActivity : AppCompatActivity(),
                 if (fragment != null) {
                     fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment!!).addToBackStack(null).commit()
                     onTopLevelNav = false
+
+
                 }
             } else {
                 fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment!!).commit()
@@ -208,15 +236,26 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onFragmentInteraction(uri: Uri) {
-        val fragmentManager = supportFragmentManager
-        val anfFragment = AddNewFood()
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, anfFragment)
+
+    }
+
+    override fun onClick(v: View) {
+        fragment = AddNewFood()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, fragment!!)
                 .addToBackStack(null)
                 .commit()
     }
 
-    override fun onClick(v: View) {
+    override fun onNewFoodSaved(position: Bundle) {
+        val newFood = Foods(position.getLong("upc"), position.getString("name"))
+        (databaseViewModel as DatabaseViewModel).insertWrapper(newFood)
+    }
 
+    override fun onAttachFragment(fragment: Fragment) {
+        if (fragment is AddNewFood) {
+            fragment.setOnSaveButtonPressedListener(this)
+        }
     }
 }
+

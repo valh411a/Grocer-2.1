@@ -49,7 +49,7 @@ class AllergyItemFragment : Fragment() {
         viewPiece.text = allergyName
 
         if (savedInstanceState == null) {
-            val allergyFoodList = FoodFragment()
+            val allergyFoodList = FoodListFragment()
             childFragmentManager
                     .beginTransaction()
                     .add(R.id.list_container, allergyFoodList)

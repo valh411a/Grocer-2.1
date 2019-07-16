@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity (tableName = "Foods")
 data class Foods(
-        @PrimaryKey val upc: Int,
+        @PrimaryKey val upc: Long,
         @ColumnInfo(name = "food_type") val foodType: String?
 ) {
     fun getName(): String? {

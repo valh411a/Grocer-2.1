@@ -23,7 +23,7 @@ class AppRepository(
     val allDiets: LiveData<List<Diets>> = dietsDao.loadAllDiets()
 
     @WorkerThread
-    fun insert(food: Foods) {
+    suspend fun insert(food: Foods) {
         foodsDao.insert(food)
     }
 }

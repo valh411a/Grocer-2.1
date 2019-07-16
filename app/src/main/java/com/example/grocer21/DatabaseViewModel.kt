@@ -3,12 +3,15 @@ package com.example.grocer21
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.grocer21.database.AppDatabase
 import com.example.grocer21.database.entities.Allergies
 import com.example.grocer21.database.entities.Diets
 import com.example.grocer21.database.entities.Foods
+import kotlinx.coroutines.launch
 
-internal class DatabaseViewModel(application: Application) : AndroidViewModel(application) {
+internal class DatabaseViewModel(application: Application) : ViewModel() {
 
     private val repository: AppRepository
     val allFoods: LiveData<List<Foods>>
@@ -40,6 +43,16 @@ internal class DatabaseViewModel(application: Application) : AndroidViewModel(ap
         allAllergies = repository.allAllergies
         allDiets = repository.allDiets
 
+    }
+
+    fun insertWrapper(food: Foods) {
+        viewModelScope.launch {
+            insert(food)
+        }
+    }
+
+    suspend fun insert(food: Foods) {
+        repository.insert(food)
     }
 
 }

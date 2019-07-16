@@ -28,7 +28,7 @@ import com.example.grocer21.database.entities.Diets
  * Mandatory empty constructor for the fragment manager to instantiate the
  * fragment (e.g. upon screen orientation changes).
  */
-class DietFragment : Fragment() {
+class DietListFragment : Fragment() {
     private var mColumnCount = 1
     private var mListener: OnListFragmentInteractionListener? = null
     private var databaseViewModel: DatabaseViewModel? = null
@@ -64,7 +64,7 @@ class DietFragment : Fragment() {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
             view.addItemDecoration(DividerItemDecoration(view.context, VERTICAL))
-            view.adapter = MyDietRecyclerViewAdapter(databaseViewModel!!.allDiets, mListener)
+            view.adapter = this.context?.let { DietListAdapter(it) }
         }
         return view
     }
