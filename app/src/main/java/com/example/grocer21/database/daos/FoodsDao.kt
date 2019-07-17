@@ -1,10 +1,11 @@
 package com.example.grocer21.database.daos
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
 import com.example.grocer21.database.entities.Foods
+
 
 /**
  * Interface for the [Foods] entity

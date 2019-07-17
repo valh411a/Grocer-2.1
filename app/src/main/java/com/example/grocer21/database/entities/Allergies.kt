@@ -1,10 +1,11 @@
 package com.example.grocer21.database.entities
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity (tableName = "Allergies")
+
+@Entity(tableName = "Allergies")
 data class Allergies(
         @PrimaryKey val allergyID: Int,
         @ColumnInfo(name = "allergy_type") val allergyType: String?

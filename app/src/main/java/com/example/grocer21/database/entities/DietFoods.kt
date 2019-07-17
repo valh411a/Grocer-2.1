@@ -1,7 +1,8 @@
 package com.example.grocer21.database.entities
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.ForeignKey
+import androidx.room.Entity
+import androidx.room.ForeignKey
+
 
 /**
  * Entity representation of the "DietFoods" table in the database

@@ -1,7 +1,7 @@
 package com.example.grocer21
 
-import android.arch.lifecycle.LiveData
-import android.support.annotation.WorkerThread
+import androidx.lifecycle.LiveData
+import androidx.annotation.WorkerThread
 import com.example.grocer21.database.daos.*
 import com.example.grocer21.database.entities.Allergies
 import com.example.grocer21.database.entities.Diets

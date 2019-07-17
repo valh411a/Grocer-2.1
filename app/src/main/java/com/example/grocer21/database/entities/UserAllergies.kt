@@ -1,7 +1,7 @@
 package com.example.grocer21.database.entities
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.ForeignKey
+import androidx.room.Entity
+import androidx.room.ForeignKey
 
 @Entity(primaryKeys = ["userID", "allergyID"],
         foreignKeys = [
