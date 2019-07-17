@@ -1,22 +1,22 @@
 package com.example.grocer21
 
-import androidx.lifecycle.Observer
 import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.navigation.NavigationView
-import androidx.fragment.app.Fragment
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.appcompat.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.grocer21.database.entities.Allergies
 import com.example.grocer21.database.entities.Diets
 import com.example.grocer21.database.entities.Foods
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(),
         FoodListFragment.OnListFragmentInteractionListener,
@@ -49,17 +49,17 @@ class MainActivity : AppCompatActivity(),
         setSupportActionBar(toolbar)
         val actionbar = supportActionBar
         (actionbar)?.setDisplayHomeAsUpEnabled(true)
-        actionbar!!.setHomeAsUpIndicator(R.drawable.ic_menu)
+        (actionbar ?: return).setHomeAsUpIndicator(R.drawable.ic_menu)
 
         mDrawerLayout = findViewById(R.id.drawer_layout)
 
         fragment = HomeScreenFragment()
-        fragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment!!).commit()
+        fragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment ?: return).commit()
 
         databaseViewModel = DatabaseViewModel(application)
 
         if (findViewById<RecyclerView>(R.id.foodRecyclerView) != null) {
-            val recyclerView = findViewById<RecyclerView>(R.id.foodRecyclerView)!!
+            val recyclerView = findViewById<RecyclerView>(R.id.foodRecyclerView) ?: return
             val foodAdapter = FoodListAdapter(this)
             recyclerView.adapter = foodAdapter
             recyclerView.layoutManager = LinearLayoutManager(this)
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(),
         }
 
         if (findViewById<RecyclerView>(R.id.allergyRecyclerView) != null) {
-            val recyclerView = findViewById<RecyclerView>(R.id.allergyRecyclerView)!!
+            val recyclerView = findViewById<RecyclerView>(R.id.allergyRecyclerView) ?: return
             val allergyAdapter = AllergyListAdapter(this)
             recyclerView.adapter = allergyAdapter
             recyclerView.layoutManager = LinearLayoutManager(this)
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(),
         }
 
         if (findViewById<RecyclerView>(R.id.dietRecyclerView) != null) {
-            val recyclerView = findViewById<RecyclerView>(R.id.dietRecyclerView)!!
+            val recyclerView = findViewById<RecyclerView>(R.id.dietRecyclerView) ?: return
             val dietAdapter = DietListAdapter(this)
             recyclerView.adapter = dietAdapter
             recyclerView.layoutManager = LinearLayoutManager(this)
@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity(),
             true
         }
 
-        mDrawerLayout!!.addDrawerListener(
+        (mDrawerLayout ?: return).addDrawerListener(
                 object : DrawerLayout.DrawerListener {
                     override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                         // Respond when the drawer's position changes
@@ -165,7 +165,7 @@ class MainActivity : AppCompatActivity(),
 
         val fragmentManager = supportFragmentManager
         val name = item.getName()
-        toolbar!!.title = name
+        (toolbar ?: return).title = name
         val bundle = Bundle()
         bundle.putString("name", name)
         val foodItemFragment = FoodItemFragment()
@@ -178,7 +178,7 @@ class MainActivity : AppCompatActivity(),
 
     }
 
-    fun displayHelp() {
+    fun displayHelp(view: View) {
         val newHelpFragment = HelpDialogFragment()
         newHelpFragment.show(supportFragmentManager, "HelpDialog")
     }
@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity(),
 
         val fragmentManager = supportFragmentManager
         val name = item.getName()
-        toolbar!!.title = name
+        (toolbar ?: return).title = name
         val bundle = Bundle()
         bundle.putString("name", name)
         val allergyItemFragment = AllergyItemFragment()
@@ -204,7 +204,7 @@ class MainActivity : AppCompatActivity(),
 
         val fragmentManager = supportFragmentManager
         val name = item.getName()
-        toolbar!!.title = name
+        (toolbar ?: return).title = name
         val bundle = Bundle()
         bundle.putString("name", name)
         val dietItemFragment = DietItemFragment()
@@ -222,7 +222,7 @@ class MainActivity : AppCompatActivity(),
         if (fragmentManager.backStackEntryCount >= 0) {
             fragment = HomeScreenFragment()
             fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, fragment!!)
+                    .replace(R.id.fragmentContainer, fragment ?: return)
                     .addToBackStack(null)
                     .commit()
             onTopLevelNav = true
@@ -242,7 +242,7 @@ class MainActivity : AppCompatActivity(),
     override fun onClick(v: View) {
         fragment = AddNewFood()
         supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, fragment!!)
+                .replace(R.id.fragmentContainer, fragment ?: return)
                 .addToBackStack(null)
                 .commit()
     }

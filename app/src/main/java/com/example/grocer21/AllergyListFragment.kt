@@ -30,12 +30,12 @@ class AllergyListFragment : Fragment() {
     private var mColumnCount = 1
     private var mListener: OnListFragmentInteractionListener? = null
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnListFragmentInteractionListener) {
             mListener = context
         } else {
-            throw RuntimeException(context!!.toString() + " must implement OnListFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnListFragmentInteractionListener")
         }
     }
 
@@ -44,10 +44,8 @@ class AllergyListFragment : Fragment() {
 
         databaseViewModel = (activity)?.let { ViewModelProviders.of(it).get(DatabaseViewModel::class.java) }
         if (arguments != null) {
-            mColumnCount = arguments!!.getInt(ARG_COLUMN_COUNT)
+            mColumnCount = (arguments ?: return).getInt(ARG_COLUMN_COUNT)
         }
-
-
 
 
     }

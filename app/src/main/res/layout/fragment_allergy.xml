@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem"
-        tools:text="000000000000" />
+        tools:text="000000000000"
+        android:textIsSelectable="true" />
 
     <TextView
         android:id="@+id/content"
@@ -19,5 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem"
-        tools:text="Example Text" />
+        tools:text="Example Text"
+        android:textIsSelectable="true" />
 </LinearLayout>

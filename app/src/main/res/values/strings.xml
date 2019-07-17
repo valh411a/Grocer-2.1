@@ -3,7 +3,7 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="help_dialog">Drag out the navigation bar on the left to view and edit your diets, allergies, and more.\nClick the \"Scan Barcode\" button below to scan the barcode from a food item and view its information.</string>
+    <string name="help_dialog">Drag out the navigation bar on the left to view and edit your diets, allergies, and more.\nClick the \“Scan Barcode\” button below to scan the barcode from a food item and view its information.</string>
     <string name="got_it">Got it!</string>
 
     <string name="HomeScreenWelcome">Welcome to Grocer!</string>

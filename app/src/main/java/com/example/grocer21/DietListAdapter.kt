@@ -40,5 +40,5 @@ class DietListAdapter internal constructor(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount() = diets.size
+    override fun getItemCount(): Int = diets.size
 }

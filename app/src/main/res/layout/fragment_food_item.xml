@@ -30,7 +30,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="FOOD NAME" />
+            tools:text="FOOD NAME"
+            android:textIsSelectable="true" />
 
         <TextView
             android:id="@+id/food_item_description"

@@ -15,7 +15,7 @@ import androidx.room.ForeignKey
                     childColumns = arrayOf("allergyID")
             )
         ])
-data class FoodAllergens (
+data class FoodAllergens(
         val upc: Long,
         val allergyID: Int
 )

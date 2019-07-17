@@ -31,7 +31,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var instance: AppDatabase? = null
+        internal var instance: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase {
             val tempInstance = instance

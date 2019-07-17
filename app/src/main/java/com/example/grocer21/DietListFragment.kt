@@ -1,20 +1,17 @@
 package com.example.grocer21
 
-import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout.VERTICAL
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-
-import java.util.Objects
-
-import android.widget.LinearLayout.VERTICAL
 import com.example.grocer21.database.entities.Diets
 
 /**
@@ -33,12 +30,12 @@ class DietListFragment : Fragment() {
     private var mListener: OnListFragmentInteractionListener? = null
     private var databaseViewModel: DatabaseViewModel? = null
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnListFragmentInteractionListener) {
             mListener = context
         } else {
-            throw RuntimeException(context!!.toString() + " must implement OnListFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnListFragmentInteractionListener")
         }
     }
 
@@ -47,7 +44,7 @@ class DietListFragment : Fragment() {
 
         databaseViewModel = (activity)?.let { ViewModelProviders.of(it).get(DatabaseViewModel::class.java) }
         if (arguments != null) {
-            mColumnCount = arguments!!.getInt(ARG_COLUMN_COUNT)
+            mColumnCount = (arguments ?: return).getInt(ARG_COLUMN_COUNT)
         }
     }
 

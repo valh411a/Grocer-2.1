@@ -1,11 +1,11 @@
 package com.example.grocer21
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.grocer21.FoodListFragment.OnListFragmentInteractionListener
 import com.example.grocer21.database.entities.Foods
 
@@ -39,5 +39,5 @@ class FoodListAdapter internal constructor(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount() = foods.size
+    override fun getItemCount(): Int = foods.size
 }

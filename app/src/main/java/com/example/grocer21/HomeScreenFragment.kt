@@ -2,11 +2,10 @@ package com.example.grocer21
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import java.util.*
+import androidx.fragment.app.Fragment
 
 
 /**
@@ -19,12 +18,12 @@ class HomeScreenFragment : Fragment() {
 
     private var mListener: OnFragmentInteractionListener? = null
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             mListener = context
         } else {
-            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
         }
     }
 

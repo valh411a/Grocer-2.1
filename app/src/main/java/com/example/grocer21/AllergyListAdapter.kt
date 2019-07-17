@@ -39,5 +39,5 @@ class AllergyListAdapter internal constructor(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount() = allergies.size
+    override fun getItemCount(): Int = allergies.size
 }

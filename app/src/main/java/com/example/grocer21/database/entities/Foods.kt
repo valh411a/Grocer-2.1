@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity (tableName = "Foods")
+@Entity(tableName = "Foods")
 data class Foods(
         @PrimaryKey val upc: Long,
         @ColumnInfo(name = "food_type") val foodType: String?

@@ -30,7 +30,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="ALLERGY NAME" />
+            tools:text="ALLERGY NAME"
+            android:textIsSelectable="true" />
 
         <TextView
             android:id="@+id/allergy_description"
