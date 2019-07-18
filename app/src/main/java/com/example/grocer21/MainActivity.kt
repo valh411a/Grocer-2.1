@@ -18,18 +18,36 @@ import com.example.grocer21.database.entities.Diets
 import com.example.grocer21.database.entities.Foods
 import com.google.android.material.navigation.NavigationView
 
+/**
+ * The main activity that houses the fragments and handles interactions between them
+ */
 class MainActivity : AppCompatActivity(),
-        FoodListFragment.OnListFragmentInteractionListener,
-        HomeScreenFragment.OnFragmentInteractionListener,
-        AllergyListFragment.OnListFragmentInteractionListener,
-        DietListFragment.OnListFragmentInteractionListener,
-        FoodItemFragment.OnFragmentInteractionListener,
-        DietItemFragment.OnFragmentInteractionListener,
-        AllergyItemFragment.OnFragmentInteractionListener,
-        AllergyListContainer.OnFragmentInteractionListener,
-        FoodListContainer.OnFragmentInteractionListener,
-        DietListContainer.OnFragmentInteractionListener,
+        FoodListFragment.OnFoodListFragmentInteractionListener,
+        HomeScreenFragment.OnHomeScreenFragmentInteractionListener,
+        AllergyListFragment.OnAllergyListFragmentInteractionListener,
+        DietListFragment.OnDietListFragmentInteractionListener,
+        FoodItemFragment.OnFoodItemFragmentInteractionListener,
+        DietItemFragment.OnDietItemFragmentInteractionListener,
+        AllergyItemFragment.AllergyItemFragmentInteractionListener,
+        AllergyListContainer.OnAllergyListContainerInteractionListener,
+        FoodListContainer.OnFoodListContainerClickListener,
+        DietListContainer.OnDietListContainerInteractionListener,
         AddNewFood.OnSaveButtonPressedListener {
+    override fun onDietListContainerInteraction(uri: Uri) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onDietItemFragmentInteraction() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onFoodItemFragmentInteraction() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onHomeScreenFragmentInteraction() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
 
     private var mDrawerLayout: DrawerLayout? = null
@@ -40,6 +58,9 @@ class MainActivity : AppCompatActivity(),
     private lateinit var databaseViewModel: ViewModel
 
 
+    /**
+     * Lifecycle method
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -75,9 +96,12 @@ class MainActivity : AppCompatActivity(),
             recyclerView.adapter = allergyAdapter
             recyclerView.layoutManager = LinearLayoutManager(this)
 
-            (databaseViewModel as DatabaseViewModel).allAllergies.observe(this, Observer { allergies ->
-                allergies?.let { allergyAdapter.setAllergies(it) }
-            })
+            (databaseViewModel as DatabaseViewModel)
+                    .allAllergies
+                    .observe(this,
+                            Observer { allergies ->
+                                allergies?.let { allergyAdapter.setAllergies(it) }
+                            })
         }
 
         if (findViewById<RecyclerView>(R.id.dietRecyclerView) != null) {
@@ -113,13 +137,20 @@ class MainActivity : AppCompatActivity(),
             mDrawerLayout!!.closeDrawers()
             if (onTopLevelNav) {
                 if (fragment != null) {
-                    fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment!!).addToBackStack(null).commit()
+                    fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, fragment!!)
+                            .addToBackStack(null)
+                            .commit()
                     onTopLevelNav = false
 
 
                 }
             } else {
-                fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment!!).commit()
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, fragment!!)
+                        .commit()
             }
 
             true
@@ -151,6 +182,9 @@ class MainActivity : AppCompatActivity(),
     }
 
 
+    /**
+     * function that closes the navigation drawer if an item was selected
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
@@ -161,7 +195,7 @@ class MainActivity : AppCompatActivity(),
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onListFragmentInteraction(item: Foods) {
+    override fun onFoodListFragmentInteraction(item: Foods) {
 
         val fragmentManager = supportFragmentManager
         val name = item.getName()
@@ -178,6 +212,11 @@ class MainActivity : AppCompatActivity(),
 
     }
 
+    /**
+     * creates a dialog fragment when the "help" button is pressed (see [HelpDialogFragment])
+     *
+     * view variable is there for the onClick attach in the XML file
+     */
     fun displayHelp(view: View) {
         val newHelpFragment = HelpDialogFragment()
         newHelpFragment.show(supportFragmentManager, "HelpDialog")
@@ -200,7 +239,7 @@ class MainActivity : AppCompatActivity(),
 
     }
 
-    override fun onListFragmentInteraction(item: Diets) {
+    override fun onDietListFragmentInteraction(item: Diets) {
 
         val fragmentManager = supportFragmentManager
         val name = item.getName()
@@ -217,6 +256,11 @@ class MainActivity : AppCompatActivity(),
 
     }
 
+    /**
+     * Navigation method that handles back button presses
+     *
+     * will be modified when actual navigation structure is implemented
+     */
     override fun onBackPressed() {
         val fragmentManager = supportFragmentManager
         if (fragmentManager.backStackEntryCount >= 0) {
@@ -231,11 +275,11 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    override fun onFragmentInteraction() {
+    override fun onAllergyFragmentInteraction() {
 
     }
 
-    override fun onFragmentInteraction(uri: Uri) {
+    override fun onAllergyListContainerInteraction(uri: Uri) {
 
     }
 
@@ -252,6 +296,9 @@ class MainActivity : AppCompatActivity(),
         (databaseViewModel as DatabaseViewModel).insertWrapper(newFood)
     }
 
+    /**
+     * function that overrides [AddNewFood.setOnSaveButtonPressedListener]
+     */
     override fun onAttachFragment(fragment: Fragment) {
         if (fragment is AddNewFood) {
             fragment.setOnSaveButtonPressedListener(this)

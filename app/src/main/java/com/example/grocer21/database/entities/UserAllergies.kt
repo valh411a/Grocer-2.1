@@ -3,6 +3,10 @@ package com.example.grocer21.database.entities
 import androidx.room.Entity
 import androidx.room.ForeignKey
 
+/**
+ * Class representation of the "userallergies" table,
+ * joins [Profile] table and [Allergies] table
+ */
 @Entity(primaryKeys = ["userID", "allergyID"],
         foreignKeys = [
             ForeignKey(
@@ -16,6 +20,12 @@ import androidx.room.ForeignKey
             )
         ])
 data class UserAllergies(
+        /**
+         * value for the foreign key from the [Profile] table
+         */
         val userID: Int,
+        /**
+         * value for the foreign key from the [Allergies] table
+         */
         val allergyID: Int
 )

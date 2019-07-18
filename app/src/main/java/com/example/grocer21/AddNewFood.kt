@@ -24,11 +24,17 @@ class AddNewFood : Fragment() {
     private var mListener: OnSaveButtonPressedListener? = null
     private lateinit var callback: OnSaveButtonPressedListener
 
+    /**
+     * Listener function for the save button that attaches the [callback] variable
+     */
     fun setOnSaveButtonPressedListener(callback: OnSaveButtonPressedListener) {
         this.callback = callback
     }
 
 
+    /**
+     * Lifecycle method for fragment creation
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_add_new_food, container, false)
@@ -48,7 +54,10 @@ class AddNewFood : Fragment() {
                 extras.putLong("upc", mEditFoodUPCView.text.toString().toLong())
                 callback.onNewFoodSaved(extras)
             } else {
-                Toast.makeText(view.context, "You cannot add empty foods. Press cancel to go back.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                        view.context,
+                        "You cannot add empty foods. Press cancel to go back.",
+                        Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -62,30 +71,33 @@ class AddNewFood : Fragment() {
         return view
     }
 
+    /**
+     * Lifecycle method for fragment attachment to the [MainActivity]
+     */
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnSaveButtonPressedListener) {
             mListener = context
         } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener")
+            throw RuntimeException("$context must implement AllergyItemFragmentInteractionListener")
         }
     }
 
+    /**
+     * Lifecycle method for the detachment from the [MainActivity]
+     */
     override fun onDetach() {
         super.onDetach()
         mListener = null
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
+     * Listener method for the save button that runs the [onNewFoodSaved] function
      */
     interface OnSaveButtonPressedListener {
+        /**
+         * overridden function in [MainActivity] that puts the new food into the database
+         */
         fun onNewFoodSaved(position: Bundle) {
 
         }

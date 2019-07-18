@@ -3,24 +3,27 @@ package com.example.grocer21
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [DietListContainer.OnFragmentInteractionListener] interface
+ * [DietListContainer.OnDietListContainerInteractionListener] interface
  * to handle interaction events.
  */
 class DietListContainer : Fragment() {
 
-    private var mListener: OnFragmentInteractionListener? = null
+    private var mListener: OnDietListContainerInteractionListener? = null
 
 
+    /**
+     * LifeCycle Method
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_diet_list_container, container, false)
@@ -32,30 +35,33 @@ class DietListContainer : Fragment() {
         return view
     }
 
+    /**
+     * LifeCycle Method
+     */
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
+        if (context is OnDietListContainerInteractionListener) {
             mListener = context
         } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener")
+            throw RuntimeException("$context must implement AllergyItemFragmentInteractionListener")
         }
     }
 
+    /**
+     * LifeCycle Method
+     */
     override fun onDetach() {
         super.onDetach()
         mListener = null
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
+     * Listener for interactions on the fragment in the [MainActivity]
      */
-    interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
+    interface OnDietListContainerInteractionListener {
+        /**
+         * Overridden handler method for interactions on the fragment in the [MainActivity]
+         */
+        fun onDietListContainerInteraction(uri: Uri)
     }
 }// Required empty public constructor

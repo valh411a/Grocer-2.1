@@ -18,7 +18,7 @@ import com.example.grocer21.database.entities.Foods
  * A fragment representing a list of Items.
  *
  *
- * Activities containing this fragment MUST implement the OnListFragmentInteractionListener
+ * Activities containing this fragment MUST implement the OnAllergyListFragmentInteractionListener
  * interface.
  */
 /**
@@ -27,19 +27,25 @@ import com.example.grocer21.database.entities.Foods
  */
 class FoodListFragment : Fragment() {
     private var mColumnCount = 1
-    private var mListener: OnListFragmentInteractionListener? = null
+    private var mListener: OnFoodListFragmentInteractionListener? = null
     private var databaseViewModel: DatabaseViewModel? = null
 
 
+    /**
+     * Lifecycle method
+     */
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnListFragmentInteractionListener) {
+        if (context is OnFoodListFragmentInteractionListener) {
             mListener = context
         } else {
-            throw RuntimeException("$context must implement OnListFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnAllergyListFragmentInteractionListener")
         }
     }
 
+    /**
+     * Lifecycle method
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -49,6 +55,9 @@ class FoodListFragment : Fragment() {
         }
     }
 
+    /**
+     * Lifecycle method
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_food_list, container, false)
@@ -67,23 +76,23 @@ class FoodListFragment : Fragment() {
         return view
     }
 
+    /**
+     * Lifecycle method
+     */
     override fun onDetach() {
         super.onDetach()
         mListener = null
     }
 
-
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
+     * Listener for item clicks in the [FoodListFragment]
      */
-    interface OnListFragmentInteractionListener {
-        fun onListFragmentInteraction(item: Foods)
+    interface OnFoodListFragmentInteractionListener {
+        /**
+         * Overridden in the [MainActivity], creates a [FoodItemFragment] from the list
+         * item selected
+         */
+        fun onFoodListFragmentInteraction(item: Foods)
     }
 
     companion object {

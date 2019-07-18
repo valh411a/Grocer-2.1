@@ -13,23 +13,29 @@ import androidx.lifecycle.ViewModelProviders
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [FoodItemFragment.OnFragmentInteractionListener] interface
+ * [FoodItemFragment.OnFoodItemFragmentInteractionListener] interface
  * to handle interaction events.
  */
 class FoodItemFragment : Fragment() {
-    private var mListener: OnFragmentInteractionListener? = null
+    private var mListener: OnFoodItemFragmentInteractionListener? = null
     private var foodName: String? = null
 
+    /**
+     * LifeCycle Method
+     */
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
+        if (context is OnFoodItemFragmentInteractionListener) {
             mListener = context
         } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener")
+            throw RuntimeException("$context must implement AllergyItemFragmentInteractionListener")
         }
 
     }
 
+    /**
+     * LifeCycle Method
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         foodName = (this.arguments)?.getString("name")
@@ -40,6 +46,9 @@ class FoodItemFragment : Fragment() {
         }
     }
 
+    /**
+     * LifeCycle Method
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -65,22 +74,22 @@ class FoodItemFragment : Fragment() {
         return view
     }
 
+    /**
+     * LifeCycle Method
+     */
     override fun onDetach() {
         super.onDetach()
         mListener = null
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
+     * Listener for interactions on the fragment in the [MainActivity]
      */
-    interface OnFragmentInteractionListener {
-        fun onFragmentInteraction()
+    interface OnFoodItemFragmentInteractionListener {
+        /**
+         * overridden handler for interactions on the fragment in the [MainActivity]
+         */
+        fun onFoodItemFragmentInteraction()
     }
 
     companion object {

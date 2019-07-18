@@ -11,14 +11,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [FoodListContainer.OnFragmentInteractionListener] interface
+ * [FoodListContainer.OnFoodListContainerClickListener] interface
  * to handle interaction events.
  */
 class FoodListContainer : Fragment() {
 
-    private var mListener: OnFragmentInteractionListener? = null
+    private var mListener: OnFoodListContainerClickListener? = null
 
 
+    /**
+     * Lifecycle method
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_food_list_container, container, false)
@@ -28,22 +31,22 @@ class FoodListContainer : Fragment() {
         return view
     }
 
+    /**
+     * Lifecycle method
+     */
     override fun onDetach() {
         super.onDetach()
         mListener = null
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
+     * onClickListener for FAB clicks in the [FoodListContainer]
      */
-    interface OnFragmentInteractionListener : View.OnClickListener {
+    interface OnFoodListContainerClickListener : View.OnClickListener {
 
+        /**
+         * Overridden in the [MainActivity], launches the [AddNewFood] fragment
+         */
         override fun onClick(v: View)
     }
 }// Required empty public constructor

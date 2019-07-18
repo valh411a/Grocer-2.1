@@ -11,22 +11,28 @@ import androidx.fragment.app.Fragment
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [HomeScreenFragment.OnFragmentInteractionListener] interface
+ * [HomeScreenFragment.OnHomeScreenFragmentInteractionListener] interface
  * to handle interaction events.
  */
 class HomeScreenFragment : Fragment() {
 
-    private var mListener: OnFragmentInteractionListener? = null
+    private var mListener: OnHomeScreenFragmentInteractionListener? = null
 
+    /**
+     * Lifecycle method
+     */
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
+        if (context is OnHomeScreenFragmentInteractionListener) {
             mListener = context
         } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener")
+            throw RuntimeException("$context must implement AllergyItemFragmentInteractionListener")
         }
     }
 
+    /**
+     * Lifecycle method
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity)?.title = "Home"
@@ -34,22 +40,21 @@ class HomeScreenFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home_screen, container, false)
     }
 
+    /**
+     * Lifecycle method
+     */
     override fun onDetach() {
         super.onDetach()
         mListener = null
     }
 
-
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
+     * Listener for handling interactions on the fragment in the [MainActivity]
      */
-    interface OnFragmentInteractionListener {
-        fun onFragmentInteraction()
+    interface OnHomeScreenFragmentInteractionListener {
+        /**
+         * Overridden handler method in the [MainActivity]
+         */
+        fun onHomeScreenFragmentInteraction()
     }
 }// Required empty public constructor

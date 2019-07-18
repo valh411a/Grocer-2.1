@@ -3,21 +3,28 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="help_dialog">Drag out the navigation bar on the left to view and edit your diets, allergies, and more.\nClick the \“Scan Barcode\” button below to scan the barcode from a food item and view its information.</string>
+    <string name="help_dialog">
+        Drag out the navigation bar on the left to view and edit your diets,
+        allergies, and more.\nClick the \“Scan Barcode\”
+        button below to scan the barcode from a food item and view its information.</string>
     <string name="got_it">Got it!</string>
 
     <string name="HomeScreenWelcome">Welcome to Grocer!</string>
     <string name="HomeScreenInfoButton">What do?</string>
     <string name="HomeScreenScanBarcodeButton">Scan Barcode</string>
-    <string name="allergyfragmenttitle">Allergies</string>
-    <string name="food_item_diet_subtitle">This food is included when regarded for the following diets:</string>
-    <string name="food_item_diets_title">Diets</string>
-    <string name="food_item_allergies_subtitle">This food can be dangerous for the following allergies:</string>
-    <string name="example_diet_description">A description of the diet goes here that outlines the basic principles that the diet provides</string>
-    <string name="diet_item_food_title">Foods</string>
+    <string name="food_item_diet_subtitle">
+        This food is included when regarded for the following diets:</string>
+    <string name="food_item_allergies_subtitle">
+        This food can be dangerous for the following allergies:</string>
+    <string name="example_diet_description">
+        A description of the diet goes here that outlines
+        the basic principles that the diet provides</string>
     <string name="diet_list_subtitle">The following foods are a good fit for this diet:</string>
-    <string name="food_item_description">A brief description of the food item goes here that informs the user in the slight case they aren\'t sure what they clicked.</string>
-    <string name="allergy_description">A brief summary of the allergy goes here which describes it.</string>
+    <string name="food_item_description">
+        A brief description of the food item goes here that informs the user
+        in the slight case they aren\'t sure what they clicked.</string>
+    <string name="allergy_description">
+        A brief summary of the allergy goes here which describes it.</string>
     <string name="allergy_food_list_subtitle">These foods are dangerous for this diet:</string>
     <string name="foods">Foods</string>
     <string name="allergies">Allergies</string>
@@ -30,4 +37,5 @@
     <string name="_123456789012">123456789012</string>
     <string name="cancel">Cancel</string>
     <string name="add">Add</string>
+    <string name="add_a_new_food">Add a New Food</string>
 </resources>
